@@ -1,0 +1,33 @@
+# VCS / CI
+.git
+.github
+.gitlab-ci.yml
+
+# Editor / tooling
+.vscode
+.zed
+.pre-commit-config.yaml
+
+# Python build noise (nested patterns so they match under backend/ too)
+**/.venv/
+**/__pycache__/
+**/*.pyc
+**/.ruff_cache/
+**/.pytest_cache/
+.coverage
+htmlcov/
+
+# Runtime / local artifacts
+dumps/
+backend/media/
+backend/static/
+backend/logs/
+backend/celerybeat-schedule
+
+# Docs & env
+*.md
+docs/
+.env
+.env.example
+.dockerignore
+.gitignore

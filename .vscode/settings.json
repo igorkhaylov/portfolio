@@ -1,0 +1,30 @@
+{
+    "cSpell.language": "en,ru",
+    "cSpell.words": [
+        "asgi",
+        "batisteo",
+        "celerybeat",
+        "collectstatic",
+        "compilemessages",
+        "corsheaders",
+        "createsuperuserauto",
+        "FLUSHALL",
+        "geminicodeassist",
+        "Gruntfuggly",
+        "gunicorn",
+        "healthcheck",
+        "isort",
+        "isready",
+        "keepalive",
+        "makemessages",
+        "psql",
+        "pycache",
+        "pytest",
+        "referer",
+        "runserver",
+        "sendfile",
+        "startapp",
+        "startproject",
+        "wsgi"
+    ]
+}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}404 — {{ profile.full_name }}{% endblock %}
+
+{% block body %}
+    <main id="main">
+        <section class="d-flex flex-column justify-content-center align-items-center" style="min-height: 70vh;">
+            <div class="container text-center">
+                <h1 class="display-1">404</h1>
+                <p class="lead">{% translate "This page does not exist." %}</p>
+                <a href="{% url 'portfolio:index' %}" class="btn-hero mt-3">{% translate "Back to home" %}</a>
+            </div>
+        </section>
+    </main>
+{% endblock %}

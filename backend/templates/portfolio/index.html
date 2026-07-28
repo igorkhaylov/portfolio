@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ profile.full_name }} — {{ profile.role|default:_("Portfolio") }}{% endblock %}
+
+{% block body %}
+    {% include "portfolio/sections/hero.html" %}
+
+    <main id="main">
+        {% include "portfolio/sections/about.html" %}
+        {% include "portfolio/sections/skills.html" %}
+        {% include "portfolio/sections/resume.html" %}
+        {% include "portfolio/sections/portfolio.html" %}
+        {% include "portfolio/sections/contact.html" %}
+    </main>
+{% endblock %}
+
+{% block extra_head %}
+    {# Structured data: lets search engines render a person card for the site owner. #}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "{{ profile.full_name|escapejs }}",
+            "jobTitle": "{{ profile.role|escapejs }}",
+            "email": "{{ profile.email|escapejs }}",
+            "url": "{{ request.build_absolute_uri|escapejs }}",
+            "address": "{{ profile.location|escapejs }}",
+            "sameAs": [{% for link in profile.social_links.all %}"{{ link.url|escapejs }}"{% if not forloop.last %}, {% endif %}{% endfor %}]
+        }
+    </script>
+{% endblock %}

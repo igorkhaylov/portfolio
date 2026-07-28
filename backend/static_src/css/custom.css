@@ -1,0 +1,132 @@
+/**
+ * Additions on top of the iPortfolio theme (css/style.css).
+ * Kept in a separate file so the vendor stylesheet stays upgradable.
+ */
+
+:root {
+    --accent: #18d26e;
+    --accent-dark: #13b25e;
+}
+
+/* Hero call-to-action ----------------------------------------------------- */
+
+.btn-hero {
+    display: inline-block;
+    margin-top: 22px;
+    padding: 10px 28px;
+    border: 2px solid var(--accent);
+    border-radius: 50px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-hero:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* Project cards ----------------------------------------------------------- */
+
+.portfolio .portfolio-item {
+    margin-bottom: 30px;
+}
+
+.portfolio .portfolio-info {
+    padding: 15px 5px 0;
+}
+
+.portfolio .portfolio-info h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.portfolio .portfolio-info h4 a {
+    color: #45505b;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.portfolio .portfolio-info h4 a:hover {
+    color: var(--accent);
+}
+
+.portfolio .portfolio-info p {
+    font-size: 14px;
+    color: #6b7a8d;
+    margin-bottom: 8px;
+}
+
+/* Stack badges ------------------------------------------------------------ */
+
+.portfolio-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.badge-stack {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 50px;
+    background: rgba(24, 210, 110, 0.12);
+    color: var(--accent-dark);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Skills: icon inside the label ------------------------------------------- */
+
+.skills .progress .skill i {
+    margin-right: 6px;
+    color: var(--accent);
+}
+
+/* Flash messages ---------------------------------------------------------- */
+
+#messages .alert {
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+/* Contact form states (replaces the vendor php-email-form styles) ---------- */
+
+.contact-form .loading,
+.contact-form .error-message,
+.contact-form .sent-message {
+    display: none;
+}
+
+.contact-form .loading.d-block,
+.contact-form .error-message.d-block,
+.contact-form .sent-message.d-block {
+    display: block !important;
+}
+
+.contact-form .error-message {
+    padding: 15px;
+    border-radius: 4px;
+    background: #ed3c0d;
+    color: #fff;
+    font-weight: 600;
+}
+
+.contact-form .sent-message {
+    padding: 15px;
+    border-radius: 4px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+}
+
+.contact-form .field-error {
+    display: block;
+    margin-top: 4px;
+    color: #ed3c0d;
+    font-size: 13px;
+}

@@ -1,0 +1,13 @@
+{% load i18n %}
+
+<footer id="footer">
+    <div class="container">
+        <div class="copyright">
+            &copy; {% now "Y" %} <strong><span>{{ profile.full_name }}</span></strong>
+        </div>
+        <div class="credits">
+            <!-- BootstrapMade's license requires this attribution to stay in place. -->
+            {% translate "Design" %}: <a href="https://bootstrapmade.com/" rel="nofollow noopener" target="_blank">BootstrapMade</a>
+        </div>
+    </div>
+</footer>

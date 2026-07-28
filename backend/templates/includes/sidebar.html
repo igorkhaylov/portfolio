@@ -1,0 +1,42 @@
+{% load static i18n portfolio_tags %}
+
+<header id="header">
+    <div class="d-flex flex-column">
+
+        <div class="profile">
+            {% if profile.avatar %}
+                <img src="{{ profile.avatar.small.url }}" alt="{{ profile.full_name }}" class="img-fluid rounded-circle">
+            {% else %}
+                <img src="{% static 'img/profile-img.jpg' %}" alt="{{ profile.full_name }}" class="img-fluid rounded-circle">
+            {% endif %}
+
+            <h1 class="text-light"><a href="{% url 'portfolio:index' %}">{{ profile.full_name }}</a></h1>
+
+            <div class="social-links mt-3 text-center">
+                {% for link in profile.social_links.all %}
+                    <a href="{{ link.url }}" target="_blank" rel="noopener" title="{{ link.title }}">
+                        <i class="{{ link.icon_class }}"></i>
+                    </a>
+                {% endfor %}
+
+                {% get_available_languages as LANGUAGES %}
+                {% for code, name in LANGUAGES %}
+                    {% if code != LANGUAGE_CODE %}
+                        <a href="{% switch_language_url code %}" class="bg-gradient" hreflang="{{ code }}">{{ code|upper }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <nav id="navbar" class="nav-menu navbar">
+            <ul>
+                <li><a href="{% url 'portfolio:index' %}#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>{% translate "Home" %}</span></a></li>
+                <li><a href="{% url 'portfolio:index' %}#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>{% translate "About" %}</span></a></li>
+                <li><a href="{% url 'portfolio:index' %}#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>{% translate "Resume" %}</span></a></li>
+                <li><a href="{% url 'portfolio:index' %}#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>{% translate "Portfolio" %}</span></a></li>
+                <li><a href="{% url 'portfolio:index' %}#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>{% translate "Contact" %}</span></a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>

@@ -1,0 +1,61 @@
+{% load static i18n %}
+
+<section id="about" class="about">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>{% translate "About" %}</h2>
+            {% if profile.summary %}<p>{{ profile.summary|linebreaksbr }}</p>{% endif %}
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4" data-aos="fade-right">
+                {% if profile.avatar %}
+                    <img src="{{ profile.avatar.medium.url }}" class="img-fluid" alt="{{ profile.full_name }}">
+                {% else %}
+                    <img src="{% static 'img/profile-img.jpg' %}" class="img-fluid" alt="{{ profile.full_name }}">
+                {% endif %}
+            </div>
+
+            <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+                <h3>{{ profile.role }}</h3>
+                {% if profile.bio %}<p class="fst-italic">{{ profile.bio|linebreaksbr }}</p>{% endif %}
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul>
+                            {% if profile.birth_date %}
+                                <li><i class="bi bi-chevron-right"></i> <strong>{% translate "Birthday" %}:</strong>
+                                    <span>{{ profile.birth_date|date:"d E Y" }}</span></li>
+                            {% endif %}
+                            {% if profile.phone %}
+                                <li><i class="bi bi-chevron-right"></i> <strong>{% translate "Phone" %}:</strong>
+                                    <span><a href="tel:{{ profile.phone }}">{{ profile.phone }}</a></span></li>
+                            {% endif %}
+                            {% if profile.location %}
+                                <li><i class="bi bi-chevron-right"></i> <strong>{% translate "City" %}:</strong>
+                                    <span>{{ profile.location }}</span></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+                        <ul>
+                            {% if profile.years_of_experience %}
+                                <li><i class="bi bi-chevron-right"></i> <strong>{% translate "Experience" %}:</strong>
+                                    <span>{% blocktranslate with years=profile.years_of_experience %}{{ years }} years{% endblocktranslate %}</span></li>
+                            {% endif %}
+                            {% if profile.email %}
+                                <li><i class="bi bi-chevron-right"></i> <strong>{% translate "Email" %}:</strong>
+                                    <span><a href="mailto:{{ profile.email }}">{{ profile.email }}</a></span></li>
+                            {% endif %}
+                            <li><i class="bi bi-chevron-right"></i> <strong>{% translate "Freelance" %}:</strong>
+                                <span>{% if profile.is_available_for_hire %}{% translate "Available" %}{% else %}{% translate "Not available" %}{% endif %}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,75 @@
+{% load i18n %}
+
+<section id="contact" class="contact">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>{% translate "Contact" %}</h2>
+        </div>
+
+        <div class="row" data-aos="fade-in">
+            <div class="col-lg-5 d-flex align-items-stretch">
+                <div class="info">
+                    {% if profile.location %}
+                        <div class="address">
+                            <i class="bi bi-geo-alt"></i>
+                            <h4>{% translate "Location" %}:</h4>
+                            <p>{{ profile.location }}</p>
+                        </div>
+                    {% endif %}
+                    {% if profile.email %}
+                        <div class="email">
+                            <i class="bi bi-envelope"></i>
+                            <h4>{% translate "Email" %}:</h4>
+                            <p><a href="mailto:{{ profile.email }}">{{ profile.email }}</a></p>
+                        </div>
+                    {% endif %}
+                    {% if profile.phone %}
+                        <div class="phone">
+                            <i class="bi bi-phone"></i>
+                            <h4>{% translate "Call" %}:</h4>
+                            <p><a href="tel:{{ profile.phone }}">{{ profile.phone }}</a></p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+                <form action="{% url 'portfolio:contact' %}" method="post" role="form" class="contact-form" novalidate>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="{{ contact_form.name.id_for_label }}">{% translate "Your name" %}</label>
+                            {{ contact_form.name }}
+                        </div>
+                        <div class="form-group col-md-6 mt-3 mt-md-0">
+                            <label for="{{ contact_form.email.id_for_label }}">{% translate "Your email" %}</label>
+                            {{ contact_form.email }}
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="{{ contact_form.subject.id_for_label }}">{% translate "Subject" %}</label>
+                        {{ contact_form.subject }}
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="{{ contact_form.message.id_for_label }}">{% translate "Message" %}</label>
+                        {{ contact_form.message }}
+                    </div>
+
+                    {# Honeypot: hidden from humans, irresistible to bots. #}
+                    <div class="d-none" aria-hidden="true">{{ contact_form.website }}</div>
+
+                    <div class="my-3">
+                        <div class="loading">{% translate "Sending..." %}</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">{% translate "Your message has been sent. Thank you!" %}</div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit">{% translate "Send message" %}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
