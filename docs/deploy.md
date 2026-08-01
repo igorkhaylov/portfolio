@@ -126,7 +126,7 @@ Two ways to trigger:
   environment and an image tag (`latest`, or `sha-<full-sha>` to pin).
 - **Auto on merge (opt-in):** set the repository **variable** `AUTO_DEPLOY=true`
   (Settings → Secrets and variables → Actions → **Variables**). Every successful
-  master build then deploys its exact `sha-<full-sha>`. Leave it unset on the bare
+  main build then deploys its exact `sha-<full-sha>`. Leave it unset on the bare
   template / on projects that deploy manually — the job is skipped, not failed.
 
 ## 5. Rollback
@@ -150,4 +150,4 @@ registry; the server authenticates with a project **Deploy Token** (scope
 `read_registry`) instead of a PAT — Settings → Repository → Deploy tokens. CI/CD
 variables: `CI_DEPLOY_USER`/`CI_DEPLOY_PASSWORD` (the deploy token) plus
 `DEV_SSH_KEY`/`DEV_HOST`/`DEV_PORT`/`DEV_USER`/`DEV_PATH` (and `PROD_*`). Deploys pin
-`sha-$CI_COMMIT_SHA` automatically on the `dev`/`master` branches.
+`sha-$CI_COMMIT_SHA` automatically on the `dev`/`main` branches.

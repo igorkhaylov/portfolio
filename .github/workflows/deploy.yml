@@ -4,7 +4,7 @@ name: Deploy
 # server; the SERVER logs in to GHCR, pulls the prebuilt backend image (from
 # build-push.yml) and updates the stack via docker-compose.prod.yml — nothing is built.
 #
-# Runs automatically after "Build and push backend image" succeeds on master (deploys
+# Runs automatically after "Build and push backend image" succeeds on main (deploys
 # the exact sha-<full-sha> that was just built) — but ONLY when the repo variable
 # AUTO_DEPLOY is "true". Otherwise the auto path is skipped; deploy manually with a
 # chosen tag via workflow_dispatch (which always works).
@@ -26,7 +26,7 @@ on:
   workflow_run:
     workflows: ["Build and push backend image"]
     types: [completed]
-    branches: [master]
+    branches: [main]
   workflow_dispatch:
     inputs:
       environment:
