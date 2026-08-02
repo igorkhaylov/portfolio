@@ -40,17 +40,17 @@ PROFILE = {
         "Mapbox API. These days: Django and DRF, PostgreSQL, Celery, Docker and deployments on "
         "Linux servers. Constantly learning and shipping new technologies."
     ),
-    "location_ru": "Самарканд, Узбекистан",
-    "location_en": "Samarkand, Uzbekistan",
+    "location_ru": "Ташкент, Узбекистан",
+    "location_en": "Tashkent, Uzbekistan",
     "email": "info@itnova.uz",
     "phone": "+998 33 345-41-15",
     "birth_date": date(1999, 1, 29),
     "career_started_at": 2019,
     "is_available_for_hire": True,
-    "meta_description_ru": "Игорь Хайлов — backend-разработчик на Python и Django. Самарканд, Узбекистан.",
-    "meta_description_en": "Igor Khaylov — backend developer, Python and Django. Samarkand, Uzbekistan.",
-    "meta_keywords_ru": "Python, Django, backend, разработчик, Самарканд, Узбекистан",
-    "meta_keywords_en": "Python, Django, backend developer, Samarkand, Uzbekistan",
+    "meta_description_ru": "Игорь Хайлов — backend-разработчик на Python и Django. Ташкент, Узбекистан.",
+    "meta_description_en": "Igor Khaylov — backend developer, Python and Django. Tashkent, Uzbekistan.",
+    "meta_keywords_ru": "Python, Django, backend, разработчик, Ташкент, Узбекистан",
+    "meta_keywords_en": "Python, Django, backend developer, Tashkent, Uzbekistan",
     "is_active": True,
 }
 
