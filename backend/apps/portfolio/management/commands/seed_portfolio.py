@@ -14,7 +14,17 @@ from datetime import date
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
-from portfolio.models import Course, Education, Experience, Profile, ProjectCategory, Skill, SkillGroup, SocialLink
+from portfolio.models import (
+    Course,
+    Education,
+    Experience,
+    Profile,
+    Project,
+    ProjectCategory,
+    Skill,
+    SkillGroup,
+    SocialLink,
+)
 
 PROFILE = {
     "full_name": "Игорь Хайлов",
@@ -79,12 +89,14 @@ EXPERIENCE = [
             "Backend-разработка сайтов и веб-приложений на Django\n"
             "Доработка и поддержка существующих проектов\n"
             "Веб-приложения для бизнеса под ключ\n"
+            "Самостоятельно поднимал и настраивал боевые серверы, разворачивал на них проекты\n"
             "Преподавал программирование на Python в IT-школе"
         ),
         "highlights_en": (
             "Backend development of websites and web applications with Django\n"
             "Maintenance and feature work on existing projects\n"
             "Turnkey web applications for business\n"
+            "Provisioned and configured production servers and deployed the projects on them\n"
             "Taught Python programming at an IT school"
         ),
     },
@@ -220,6 +232,7 @@ SKILL_GROUPS = [
             ("Django", 90, "bxl-django", True),
             ("Django REST Framework", 85, "", True),
             ("Celery", 75, "", False),
+            ("Telegram Bot API", 75, "", False),
             ("PostgreSQL", 80, "bxl-postgresql", True),
             ("Redis", 70, "bxl-redis", False),
         ],
@@ -253,6 +266,268 @@ PROJECT_CATEGORIES = [
     {"rank": 10, "slug": "web", "title_ru": "Веб-сайты", "title_en": "Websites"},
     {"rank": 20, "slug": "webapp", "title_ru": "Веб-приложения", "title_en": "Web applications"},
     {"rank": 30, "slug": "tools", "title_ru": "Инструменты", "title_en": "Tools"},
+]
+
+# `category` is a PROJECT_CATEGORIES slug, `skills` are Skill.name_ru values from
+# SKILL_GROUPS above.
+PROJECTS = [
+    {
+        "rank": 10,
+        "slug": "splay",
+        "category": "webapp",
+        "is_featured": True,
+        "title_ru": "SPlay — онлайн-кинотеатр",
+        "title_en": "SPlay — online cinema",
+        "summary_ru": "Стриминговый сервис: фильмы, сериалы и шоу на узбекском и русском языках",
+        "summary_en": "Streaming service: films, series and shows in Uzbek and Russian",
+        "description_ru": (
+            "Крупный онлайн-кинотеатр с отечественным и мировым контентом: фильмы, сериалы, "
+            "шоу и трансляции телеканалов, веб-версия и мобильные приложения. Отвечал за "
+            "серверную часть сервиса — биллинг, статистику, защиту видеопотоков — и за "
+            "серверную инфраструктуру целиком."
+        ),
+        "description_en": (
+            "A large online cinema with local and international content: films, series, shows "
+            "and live TV channels, on the web and in mobile apps. I owned the backend of the "
+            "service — billing, statistics, video stream protection — and the whole server "
+            "infrastructure."
+        ),
+        "role_ru": "Backend-разработчик · DevOps",
+        "role_en": "Backend Developer · DevOps",
+        "highlights_ru": (
+            "Разработал биллинг: тарифы, подписки и приём платежей\n"
+            "Построил систему сбора и агрегации статистики просмотров\n"
+            "Реализовал собственное шифрование HLS-потоков и встроил его поддержку в плеер\n"
+            "Защитил трансляции телеканалов от кражи и несанкционированного ретранслирования потоков\n"
+            "Сделал профили пользователей\n"
+            "Спроектировал серверную архитектуру сервиса\n"
+            "Самостоятельно поднял и настроил всю серверную инфраструктуру"
+        ),
+        "highlights_en": (
+            "Built the billing: plans, subscriptions and payment processing\n"
+            "Built the viewing-statistics collection and aggregation\n"
+            "Implemented custom HLS stream encryption and added its support to the player\n"
+            "Protected live TV channels from stream theft and unauthorised restreaming\n"
+            "Built user profiles\n"
+            "Designed the server architecture of the service\n"
+            "Provisioned and configured the entire server infrastructure myself"
+        ),
+        "project_url": "https://splay.uz",
+        "skills": [
+            "Python",
+            "Django",
+            "Django REST Framework",
+            "PostgreSQL",
+            "Redis",
+            "Celery",
+            "Docker",
+            "Nginx",
+            "Linux",
+        ],
+    },
+    {
+        "rank": 20,
+        "slug": "ilmi",
+        "category": "webapp",
+        "is_featured": True,
+        "title_ru": "Ilmi — образовательная платформа",
+        "title_en": "Ilmi — e-learning platform",
+        "summary_ru": "Онлайн-уроки от преподавателей и экспертов: видеокурсы и личный кабинет с прогрессом",
+        "summary_en": "Online lessons from teachers and experts: video courses and a personal progress dashboard",
+        "description_ru": (
+            "Платформа онлайн-обучения ilmi.uz: видеоуроки от преподавателей и экспертов, "
+            "личный кабинет с отслеживанием прогресса, веб-версия и мобильные приложения "
+            "для iOS и Android."
+        ),
+        "description_en": (
+            "E-learning platform ilmi.uz: video lessons from teachers and experts, a personal "
+            "progress dashboard, a web version and mobile apps for iOS and Android."
+        ),
+        "role_ru": "Backend-разработчик",
+        "role_en": "Backend Developer",
+        "highlights_ru": (
+            "Разработал backend платформы\n"
+            "API для сайта и мобильных приложений iOS и Android\n"
+            "Развернул проект на сервере компании, сам поднял и настроил сервер"
+        ),
+        "highlights_en": (
+            "Built the platform backend\n"
+            "API for the website and the iOS and Android apps\n"
+            "Provisioned and configured the company server and deployed the project"
+        ),
+        "project_url": "https://ilmi.uz",
+        "skills": ["Python", "Django", "Django REST Framework", "PostgreSQL", "Docker", "Nginx", "Linux"],
+    },
+    {
+        "rank": 30,
+        "slug": "ticket-booking",
+        "category": "webapp",
+        "title_ru": "Система бронирования билетов",
+        "title_en": "Ticket booking system",
+        "summary_ru": "Веб-приложение для бронирования билетов, управления тарифами и учёта гостей",
+        "summary_en": "Web application for ticket booking, tariff management and guest tracking",
+        "description_ru": (
+            "Система для площадки с платным входом: тарифы и билеты, бронирование и учёт "
+            "гостей. В связке с системой работают Telegram-боты (отдельный проект в портфолио)."
+        ),
+        "description_en": (
+            "A system for a paid-entry venue: tariffs and tickets, booking and guest tracking. "
+            "Telegram bots work alongside the system (a separate portfolio project)."
+        ),
+        "role_ru": "Backend-разработчик",
+        "role_en": "Backend Developer",
+        "highlights_ru": (
+            "Разработал backend: тарифы, бронирование билетов, учёт гостей\n"
+            "Панель управления для персонала\n"
+            "Развернул систему на сервере компании, сам поднял и настроил сервер"
+        ),
+        "highlights_en": (
+            "Built the backend: tariffs, ticket booking, guest tracking\n"
+            "Management panel for the staff\n"
+            "Provisioned and configured the company server and deployed the system"
+        ),
+        "skills": ["Python", "Django", "Django REST Framework", "PostgreSQL", "Linux"],
+    },
+    {
+        "rank": 40,
+        "slug": "booking-telegram-bots",
+        "category": "tools",
+        "title_ru": "Telegram-боты системы бронирования",
+        "title_en": "Telegram bots for the booking system",
+        "summary_ru": "Боты, работающие в связке с системой бронирования билетов",
+        "summary_en": "Bots working alongside the ticket booking system",
+        "description_ru": (
+            "Telegram-боты, дополняющие систему бронирования билетов: работа с бронированиями "
+            "и гостями прямо из мессенджера."
+        ),
+        "description_en": (
+            "Telegram bots that extend the ticket booking system: bookings and guests are "
+            "handled right from the messenger."
+        ),
+        "role_ru": "Backend-разработчик",
+        "role_en": "Backend Developer",
+        "highlights_ru": (
+            "Разработал Telegram-боты, интегрированные с системой бронирования\nРазвернул ботов на сервере компании"
+        ),
+        "highlights_en": (
+            "Built Telegram bots integrated with the booking system\nDeployed the bots on the company server"
+        ),
+        "skills": ["Python", "Telegram Bot API", "PostgreSQL", "Linux"],
+    },
+    {
+        "rank": 50,
+        "slug": "society-uz",
+        "category": "web",
+        "title_ru": "Society.uz — портал WOSCU",
+        "title_en": "Society.uz — WOSCU portal",
+        "summary_ru": "Портал о культурном наследии Узбекистана: фильмы, лекции, публикации и архивы",
+        "summary_en": "Cultural heritage portal of Uzbekistan: films, lectures, publications and archives",
+        "description_ru": (
+            "Портал Всемирного общества по изучению, сохранению и популяризации культурного "
+            "наследия Узбекистана (WOSCU): документальные фильмы, лекции, научные публикации "
+            "и архивные материалы."
+        ),
+        "description_en": (
+            "Portal of the World Society for the Study, Preservation and Popularization of the "
+            "Cultural Legacy of Uzbekistan (WOSCU): documentaries, lectures, research "
+            "publications and archive materials."
+        ),
+        "role_ru": "Backend-разработчик",
+        "role_en": "Backend Developer",
+        "client_ru": "WOSCU (woscu.org)",
+        "client_en": "WOSCU (woscu.org)",
+        "highlights_ru": (
+            "Разработал backend портала\n"
+            "Разделы с фильмами, лекциями, публикациями и архивными материалами\n"
+            "Развернул сайт на сервере компании, сам поднял и настроил сервер"
+        ),
+        "highlights_en": (
+            "Built the portal backend\n"
+            "Sections for films, lectures, publications and archive materials\n"
+            "Provisioned and configured the company server and deployed the site"
+        ),
+        "project_url": "https://society.uz",
+        "skills": ["Python", "Django", "PostgreSQL", "Nginx", "Linux"],
+    },
+    {
+        "rank": 60,
+        "slug": "zamon-uz",
+        "category": "web",
+        "title_ru": "Zamon.uz — новостной портал",
+        "title_en": "Zamon.uz — news portal",
+        "summary_ru": "Узбекоязычный новостной портал: политика, спорт, культура и общество",
+        "summary_en": "Uzbek-language news portal: politics, sports, culture and society",
+        "description_ru": (
+            "Новостной портал с постоянно обновляемой лентой: политика, спорт, криминал, культура и образ жизни."
+        ),
+        "description_en": (
+            "News portal with a constantly updated feed: politics, sports, crime, culture and lifestyle."
+        ),
+        "role_ru": "Backend-разработчик",
+        "role_en": "Backend Developer",
+        "highlights_ru": (
+            "Разработал backend портала: рубрики, лента новостей, рабочее место редакции\n"
+            "Развернул сайт на сервере компании, сам поднял и настроил сервер"
+        ),
+        "highlights_en": (
+            "Built the portal backend: sections, news feed, editorial workspace\n"
+            "Provisioned and configured the company server and deployed the site"
+        ),
+        "project_url": "https://zamon.uz",
+        "skills": ["Python", "Django", "PostgreSQL", "Nginx", "Linux"],
+    },
+    {
+        "rank": 70,
+        "slug": "darakchi-uz",
+        "category": "web",
+        "title_ru": "Darakchi.uz — сайт издания «Даракчи»",
+        "title_en": "Darakchi.uz — the Darakchi newspaper website",
+        "summary_ru": "Новостной сайт популярного печатного издания",
+        "summary_en": "News website of a popular print newspaper",
+        "description_ru": (
+            "Онлайн-версия печатного издания «Даракчи»: новости политики, общества и спорта, подписка на газету."
+        ),
+        "description_en": (
+            "Online edition of the Darakchi newspaper: politics, society and sports news, newspaper subscription."
+        ),
+        "role_ru": "Backend-разработчик",
+        "role_en": "Backend Developer",
+        "highlights_ru": ("Разработал backend сайта\nРазвернул сайт на сервере компании, сам поднял и настроил сервер"),
+        "highlights_en": (
+            "Built the website backend\nProvisioned and configured the company server and deployed the site"
+        ),
+        "project_url": "https://darakchi.uz",
+        "skills": ["Python", "Django", "PostgreSQL", "Nginx", "Linux"],
+    },
+    {
+        "rank": 80,
+        "slug": "stv-uz",
+        "category": "web",
+        "title_ru": "STV.uz — портал Самарканда",
+        "title_en": "STV.uz — Samarkand city portal",
+        "summary_ru": "Городской портал: новости региона, туристический справочник и доска объявлений",
+        "summary_en": "City portal: regional news, tourist guide and classifieds",
+        "description_ru": (
+            "Портал о Самарканде: новости региона, справочник достопримечательностей, музеев "
+            "и гостиниц, доска объявлений о недвижимости и услугах."
+        ),
+        "description_en": (
+            "Samarkand city portal: regional news, a guide to sights, museums and hotels, and "
+            "real-estate and services classifieds."
+        ),
+        "role_ru": "Backend-разработчик",
+        "role_en": "Backend Developer",
+        "highlights_ru": (
+            "Разработал backend портала: новости, справочные разделы, объявления\n"
+            "Развернул сайт на сервере компании, сам поднял и настроил сервер"
+        ),
+        "highlights_en": (
+            "Built the portal backend: news, guide sections, classifieds\n"
+            "Provisioned and configured the company server and deployed the site"
+        ),
+        "project_url": "https://stv.uz",
+        "skills": ["Python", "Django", "PostgreSQL", "Nginx", "Linux"],
+    },
 ]
 
 
@@ -304,8 +579,17 @@ class Command(BaseCommand):
                 skills_total += 1
         self.stdout.write(f"Skills: {skills_total} in {len(SKILL_GROUPS)} groups")
 
+        categories = {}
         for data in PROJECT_CATEGORIES:
-            ProjectCategory.objects.update_or_create(slug=data["slug"], defaults=data)
+            category, _ = ProjectCategory.objects.update_or_create(slug=data["slug"], defaults=data)
+            categories[category.slug] = category
         self.stdout.write(f"Project categories: {len(PROJECT_CATEGORIES)}")
 
-        self.stdout.write(self.style.SUCCESS("Done. Projects are added through the admin."))
+        for data in PROJECTS:
+            defaults = {k: v for k, v in data.items() if k not in ("slug", "category", "skills")}
+            defaults["category"] = categories[data["category"]]
+            project, _ = Project.objects.update_or_create(slug=data["slug"], defaults=defaults)
+            project.skills.set(Skill.objects.filter(name_ru__in=data["skills"]))
+        self.stdout.write(f"Projects: {len(PROJECTS)}")
+
+        self.stdout.write(self.style.SUCCESS("Done. Covers and gallery images are added through the admin."))
