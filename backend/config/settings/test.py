@@ -1,7 +1,7 @@
 """Test settings — runnable with NO external services.
 
 Used by pytest via `DJANGO_SETTINGS_MODULE = "config.settings.test"` (pyproject.toml).
-Everything heavy (Postgres, Redis, S3/MinIO, real email, Celery broker) is swapped for
+Everything heavy (Postgres, real email, disk storage) is swapped for
 in-memory/local backends so the suite runs anywhere, including before you have created
 your initial migrations (pytest is configured with --no-migrations).
 """
@@ -33,10 +33,6 @@ CACHES = {
 EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 
 PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
-
-# Run Celery tasks synchronously in-process.
-CELERY_TASK_ALWAYS_EAGER = True
-CELERY_TASK_EAGER_PROPAGATES = True
 
 # Quieter logs during tests.
 LOG_LEVEL = "WARNING"

@@ -97,7 +97,7 @@ jobs:
             IMAGE_OWNER=$(echo "$IMAGE_OWNER" | tr '[:upper:]' '[:lower:]')
             export BACKEND_IMAGE="ghcr.io/${IMAGE_OWNER}:${IMAGE_TAG}"
             docker compose -f docker-compose.prod.yml pull
-            docker compose -f docker-compose.prod.yml up -d   # recreates only changed services; no `down`
+            docker compose -f docker-compose.prod.yml up -d --remove-orphans   # recreates only changed services; no `down`
 
             docker logout ghcr.io
             docker image prune -f --filter "until=72h"        # keep prev image ~3d for rollback

@@ -1,12 +1,11 @@
 # Usage:
-#   make init               # FIRST RUN: .env + generated secrets, MinIO bucket, dev stack, migrate
+#   make init               # FIRST RUN: .env + secrets, dev stack, migrate, seed content
 #   make dev up             # start the development stack (containers up; backend idle)
 #   make dev run            # run the Django dev server (autoreload) — reach it at APP_PORT
 #   make up                 # local production-like stack (builds + serves via gunicorn)
 #   make prod deploy        # SERVER: pull the registry image and (re)start (no build)
 #   make dev makemigrations # run a manage.py command in the dev stack
 #   make dev logs backend   # tail logs of a service
-#   make minio              # provision bucket on the SHARED local MinIO (host service)
 #
 # DEV WORKFLOW: `make dev up` brings the stack online but the backend just idles
 # (`sleep infinity`) so you can run migrations/shell/tests freely against a live DB.
@@ -34,9 +33,9 @@ ARGS = $(filter-out dev prod $@,$(MAKECMDGOALS))
 
 # Every real target — used for .PHONY and for the typo guard below.
 KNOWN_TARGETS := help init up run down down-v build pull deploy logs shell dbshell \
-        migrate makemigrations makemessages compilemessages collectstatic \
-        createsuperuser test lint format pre-commit-install minio flush-cache \
-        flush-redis dump restore bash bash-db bash-nginx
+        migrate seed makemigrations makemessages compilemessages collectstatic \
+        createsuperuser test lint format pre-commit-install dump restore \
+        bash bash-db bash-nginx
 
 .PHONY: dev prod $(KNOWN_TARGETS)
 
@@ -52,15 +51,15 @@ ifneq ($(PRIMARY_GOAL),)
 endif
 
 help:
-	@echo "First run:   make init    # .env + generated secrets, MinIO bucket, dev stack, migrate"
+	@echo "First run:   make init    # .env + secrets, dev stack, migrate, seed content"
 	@echo "Prefix a target with 'dev' (development) or 'prod' (pull-based deploy):"
 	@echo "  dev up      then  dev run        # start stack, then serve (autoreload) at APP_PORT"
 	@echo "  up / down / down-v / build / logs [service]"
 	@echo "  prod pull / prod deploy          # server: pull the registry image and (re)start"
 	@echo "  shell dbshell bash bash-db bash-nginx"
-	@echo "  migrate makemigrations makemessages compilemessages collectstatic createsuperuser"
+	@echo "  migrate seed makemigrations makemessages compilemessages collectstatic createsuperuser"
 	@echo "  test lint format pre-commit-install"
-	@echo "  minio flush-cache flush-redis dump restore"
+	@echo "  dump [media] / restore dumps/<ts>"
 
 dev:
 	@:
@@ -70,15 +69,17 @@ prod:
 
 # --- First-time setup ---
 # One command from a fresh clone to a migrated dev stack: create .env with generated
-# secrets (never overwrites an existing one), provision the shared MinIO bucket, start
-# the DEV stack and apply migrations. Targets the dev compose explicitly, so no `dev`
-# prefix is needed. Safe to re-run. Then: `make dev createsuperuser`, `make dev run`.
+# secrets (never overwrites an existing one), start the DEV stack, apply migrations and
+# load the site content (seed_portfolio).
+# Targets the dev compose explicitly, so no `dev` prefix is needed. Safe to re-run.
+# Then: `make dev createsuperuser`, `make dev run`.
 DEV_COMPOSE := docker compose -f docker-compose.dev.yml
 init:
 	./scripts/init_env.sh
-	./scripts/ensure_minio.sh
+	mkdir -p backend/media
 	$(DEV_COMPOSE) up -d --build
 	$(DEV_COMPOSE) exec --workdir /app/backend backend python manage.py migrate
+	$(DEV_COMPOSE) exec --workdir /app/backend backend python manage.py seed_portfolio
 	@echo ""
 	@echo "Done. Next steps:"
 	@echo "  make dev createsuperuser    # create your admin account"
@@ -109,9 +110,12 @@ pull:
 # Server-side deploy: pull the prebuilt image from the registry and (re)start.
 # Usage on the server:  make prod deploy
 # Pin a tag by exporting BACKEND_IMAGE (or set it in .env) before running.
+# --remove-orphans drops containers of services no longer in the compose file
+# (e.g. the removed celery/redis services). Profiles come from COMPOSE_PROFILES in .env,
+# so an enabled db-backup is never treated as an orphan.
 deploy:
 	$(COMPOSE) pull
-	$(COMPOSE) up -d
+	$(COMPOSE) up -d --remove-orphans
 
 logs:
 	$(COMPOSE) logs -f $(ARGS)
@@ -125,6 +129,10 @@ dbshell:
 
 migrate:
 	$(COMPOSE) exec $(EXEC) backend python manage.py migrate
+
+# Load/refresh the site content from seed_portfolio.py (idempotent, safe to re-run).
+seed:
+	$(COMPOSE) exec $(EXEC) backend python manage.py seed_portfolio
 
 makemigrations:
 	$(COMPOSE) exec $(EXEC) backend python manage.py makemigrations
@@ -154,24 +162,9 @@ format:
 pre-commit-install:
 	pre-commit install
 
-# --- MinIO (provision object storage against the SHARED local MinIO) ---
-# Starts the single shared host MinIO if needed, then creates this project's bucket +
-# app user + policy. Skips entirely if the project points at external/managed storage.
-# Not prefixed with `dev`: it manages a host-level service, independent of the stack.
-minio:
-	./scripts/ensure_minio.sh
-
 # --- Utilities ---
-# Redis layout: db 0 = Celery broker + task results, db 1 = Django cache.
-# flush-cache is the safe everyday command; flush-redis wipes EVERYTHING — including
-# queued Celery tasks — so reach for it deliberately.
-flush-cache:
-	$(COMPOSE) exec redis redis-cli -n 1 FLUSHDB
-
-flush-redis:
-	$(COMPOSE) exec redis redis-cli FLUSHALL
-
-# Backup / restore (DB + manifest always; add "media" to also dump S3/MinIO media).
+# Backup / restore (PostgreSQL always; add "media" to also archive media/ — the
+# admin uploads). See docs/backup.md.
 # Examples: make dump | make dump media | make dev dump media
 #           make restore dumps/<ts> | make dev restore dumps/<ts>
 dump:

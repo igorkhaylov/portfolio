@@ -103,7 +103,7 @@ build:
         echo "$CI_DEPLOY_PASSWORD" | docker login "$CI_REGISTRY" -u "$CI_DEPLOY_USER" --password-stdin
         export BACKEND_IMAGE
         docker compose -f docker-compose.prod.yml pull
-        docker compose -f docker-compose.prod.yml up -d
+        docker compose -f docker-compose.prod.yml up -d --remove-orphans
         docker logout "$CI_REGISTRY"
         docker image prune -f --filter "until=72h"
       EOF

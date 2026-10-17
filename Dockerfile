@@ -43,7 +43,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /app
 COPY --from=builder /opt/venv /opt/venv
 COPY backend/ .
-RUN chown -R app:app /app
+# static/ and media/ are mount points (docker-compose*.yml); created here so they are
+# owned by app even before the first bind mount.
+RUN mkdir -p /app/static /app/media \
+    && chown -R app:app /app
 USER app
 
 EXPOSE 8000

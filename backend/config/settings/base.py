@@ -79,7 +79,7 @@ SECURE_HSTS_SECONDS = 31536000 if IS_SECURE_ENV else 0
 SECURE_HSTS_INCLUDE_SUBDOMAINS = IS_SECURE_ENV
 SECURE_HSTS_PRELOAD = IS_SECURE_ENV
 
-# Cap request body size (Django default is 2.5 MB); large media goes to S3 directly.
+# Cap non-file request body size (Django default is 2.5 MB). File uploads stream to disk.
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10 MB
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10 MB
 
@@ -166,18 +166,14 @@ DATABASES = {
 }
 
 # =============================================================================
-# Cache (Redis)
+# Cache
 # =============================================================================
-
-REDIS_HOST = config("REDIS_HOST", default="redis")
-REDIS_PORT = config("REDIS_PORT", default=6379, cast=int)
+# Per-process memory cache: the site is one small page and there is no Redis in the
+# stack. Nothing that must stay consistent across gunicorn workers is cached.
 
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        # db 1: Celery's broker + results live in db 0 (config/celery.py). Separate dbs
-        # let `make flush-cache` wipe the cache without touching queued tasks.
-        "LOCATION": f"redis://{REDIS_HOST}:{REDIS_PORT}/1",
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
         "TIMEOUT": 600,
     }
 }
@@ -221,12 +217,13 @@ TEMPLATES = [
 # Static & Media
 # =============================================================================
 
+# nginx serves /static/ and /media/ from shared volumes (docker-compose*.yml).
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_ROOT = Path(config("DJANGO_STATIC_ROOT", default=str(BASE_DIR / "static")))
 STATICFILES_DIRS = [BASE_DIR / "static_src"]
 
-MEDIA_URL = "media/"
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = Path(config("DJANGO_MEDIA_ROOT", default=str(BASE_DIR / "media")))
 
 # =============================================================================
 # Internationalization
@@ -251,25 +248,3 @@ MODELTRANSLATION_DEFAULT_LANGUAGE = "ru"
 MODELTRANSLATION_LANGUAGES = ("ru", "en")
 # An empty English field shows the Russian original instead of a blank block.
 MODELTRANSLATION_FALLBACK_LANGUAGES = ("ru", "en")
-
-# =============================================================================
-# Email
-# =============================================================================
-# Used by the contact-form notification task (portfolio.tasks). Without SMTP
-# credentials the backend prints to stdout, which is what dev wants anyway.
-
-EMAIL_BACKEND = config(
-    "DJANGO_EMAIL_BACKEND",
-    default="django.core.mail.backends.console.EmailBackend"
-    if DEBUG
-    else "django.core.mail.backends.smtp.EmailBackend",
-)
-EMAIL_HOST = config("DJANGO_EMAIL_HOST", default="")
-EMAIL_PORT = config("DJANGO_EMAIL_PORT", default=587, cast=int)
-EMAIL_HOST_USER = config("DJANGO_EMAIL_HOST_USER", default="")
-EMAIL_HOST_PASSWORD = config("DJANGO_EMAIL_HOST_PASSWORD", default="")
-EMAIL_USE_TLS = config("DJANGO_EMAIL_USE_TLS", default=True, cast=bool)
-DEFAULT_FROM_EMAIL = config("DJANGO_DEFAULT_FROM_EMAIL", default="noreply@localhost")
-
-# Where contact-form notifications go. Falls back to Profile.email when unset.
-CONTACT_NOTIFY_EMAIL = config("DJANGO_CONTACT_NOTIFY_EMAIL", default="")

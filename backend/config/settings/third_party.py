@@ -1,5 +1,3 @@
-from urllib.parse import urlsplit
-
 import structlog
 from decouple import config
 
@@ -36,46 +34,14 @@ SPECTACULAR_SETTINGS = {
 }
 
 # =============================================================================
-# Storage (S3 / MinIO)
+# Storage
 # =============================================================================
-# All values have safe defaults so management commands, tests and CI can import
-# settings without a full MinIO environment. Override them in .env for real use.
-# Static and media are served by S3/MinIO (NOT by nginx).
-
-_minio_access_key = config("DJANGO_MINIO_ACCESS_KEY", default="minioadmin")
-_minio_secret_key = config("DJANGO_MINIO_SECRET_KEY", default="minioadmin")
-_minio_bucket = config("DJANGO_MINIO_BUCKET_NAME", default="app-bucket")
-_minio_endpoint = config("DJANGO_MINIO_ENDPOINT", default="http://host.docker.internal:9000")  # shared host MinIO / S3
-
-# Public URL used to build media/static links. Parsed robustly so a missing/extra
-# "://" can't raise at import time.
-_custom_url = config("DJANGO_MINIO_CUSTOM_URL", default="http://localhost:9000")
-_parsed = urlsplit(_custom_url)
-_protocol = _parsed.scheme or "http"
-_domain = _parsed.netloc or _parsed.path  # tolerate a bare "host:port" without scheme
-
-_s3_options = {
-    "access_key": _minio_access_key,
-    "secret_key": _minio_secret_key,
-    "bucket_name": _minio_bucket,
-    "endpoint_url": _minio_endpoint,
-    "region_name": "us-east-1",
-    "querystring_auth": False,  # Public bucket: URLs don't expire
-    "addressing_style": "path",  # Required for MinIO
-    "url_protocol": f"{_protocol}:",
-    "custom_domain": f"{_domain}/{_minio_bucket}",
-    "file_overwrite": False,
-}
+# Local disk, served by the in-stack nginx (/static/ and /media/ volumes). Manifest
+# storage content-hashes the file names, so nginx can cache /static/ aggressively.
 
 STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.s3.S3Storage",
-        "OPTIONS": _s3_options,
-    },
-    "staticfiles": {
-        "BACKEND": "storages.backends.s3.S3Storage",
-        "OPTIONS": {**_s3_options, "location": "static", "file_overwrite": True},
-    },
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"},
 }
 
 
@@ -142,7 +108,6 @@ LOGGING = {
     "loggers": {
         "django": {"handlers": ["console"], "level": LOG_LEVEL, "propagate": False},
         "django_structlog": {"handlers": ["console"], "level": LOG_LEVEL, "propagate": False},
-        "celery": {"handlers": ["console"], "level": LOG_LEVEL, "propagate": False},
     },
 }
 

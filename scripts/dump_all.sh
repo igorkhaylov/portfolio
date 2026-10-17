@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 #
 # Create a timestamped backup under ./dumps/<ts>/:
-#   database.sql.gz  — full pg_dump (gzipped, --clean --if-exists)
-#   manifest.json    — media base URL + object counts (used to rewrite URLs on restore)
-#   media.tar.gz     — all S3/MinIO media objects (only with the "media" argument)
+#   database.sql.gz — full pg_dump of PostgreSQL (gzipped, --clean --if-exists)
+#   media.tar.gz    — media/: avatar, CV, project covers and screenshots
+#                     (only with the "media" argument)
 #
-# Media lives in S3/MinIO (not on the container filesystem), so it is dumped THROUGH
-# the app with `manage.py media_dump`, not by tarring a local directory.
+# Unlike the template there is no object storage: media sits in the backend container's
+# data volume, so it is read THROUGH the container (works the same for the dev stack,
+# where it lives under backend/).
 #
 # Usage:
-#   make dump                 # database + manifest
-#   make dump media           # + media dump from S3/MinIO (slower; downloads the bucket)
-#   make dev dump media       # same, dev stack
+#   make dump                 # database
+#   make dump media           # + media archive
+#   make prod dump media      # on the server
 #   ./scripts/dump_all.sh [media]
 #
 set -euo pipefail
@@ -48,12 +49,11 @@ $COMPOSE exec -T db pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" \
   --clean --if-exists --no-owner --no-privileges \
   | gzip >"$DIR/database.sql.gz"
 
-echo "  • manifest…"
-$COMPOSE exec -T $EXEC backend python manage.py media_info >"$DIR/manifest.json"
-
 if [ "$WITH_MEDIA" -eq 1 ]; then
-  echo "  • media from S3/MinIO (this can take a while)…"
-  $COMPOSE exec -T $EXEC backend python manage.py media_dump >"$DIR/media.tar.gz"
+  echo "  • media…"
+  $COMPOSE exec -T $EXEC backend sh -c \
+    'tar -C "$(python manage.py shell -c "from django.conf import settings; print(settings.MEDIA_ROOT)")" -czf - .' \
+    >"$DIR/media.tar.gz"
 fi
 
 echo "✓ Backup complete:"

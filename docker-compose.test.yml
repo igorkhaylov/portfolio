@@ -1,8 +1,8 @@
 name: ${PROJECT_NAME:-portfolio}-test
 
 # Runs the test suite in the minimal configuration (config.settings.test): sqlite
-# in-memory, locmem cache/email, eager Celery, in-memory storage. No db/redis/minio
-# services are needed, so this file is standalone (it does not include the prod stack).
+# in-memory, locmem cache and email, temp media dir. No db service is
+# needed, so this file is standalone (it does not include the prod stack).
 services:
   backend:
     build:

@@ -7,15 +7,8 @@ python manage.py compilemessages
 echo ">>> Applying database migrations..."
 python manage.py migrate --no-input
 
-echo ">>> Waiting for object storage (S3/MinIO) to be ready..."
-# Static AND media are served from S3/MinIO with no local-filesystem fallback, so the
-# bucket is a hard dependency. Fail fast with a clear message if it is missing/unreachable
-# instead of letting collectstatic crash mid-boot with a cryptic boto error.
-# (For the shared local MinIO, provision the bucket once with `make minio`.)
-python manage.py wait_for_storage
-
 echo ">>> Collecting static files..."
-# No --clear: never wipes the bucket on boot.
+# Into the static volume shared with nginx (docker-compose*.yml). No --clear.
 python manage.py collectstatic --no-input
 
 echo ">>> Ensuring superuser..."
