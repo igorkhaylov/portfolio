@@ -41,9 +41,9 @@ class ProjectCategoryAdmin(TranslationAdmin):
 @admin.register(Project)
 class ProjectAdmin(TranslationAdmin):
     inlines = (ProjectSkillInline, ProjectImageInline)
-    list_display = ("title", "category", "client", "released_at", "rank", "is_featured", "is_published")
+    list_display = ("title", "category", "status", "period", "rank", "is_featured", "is_published")
     list_editable = ("rank", "is_featured", "is_published")
-    list_filter = ("category", "is_featured", "is_published")
+    list_filter = ("category", "status", "is_featured", "is_published")
     search_fields = ("title", "summary", "description", "client")
     autocomplete_fields = ("category",)
     # TranslationAdmin rewrites this to the default-language field (title_ru).
@@ -53,7 +53,7 @@ class ProjectAdmin(TranslationAdmin):
     save_on_top = True
     fieldsets = (
         (None, {"fields": ("title", "slug", "category", "summary")}),
-        (_("Content"), {"fields": ("description", "highlights", "role", "client")}),
+        (_("Content"), {"fields": ("description", "highlights", "role", "client", "status", "period")}),
         (_("Media"), {"fields": (("cover", "cover_preview"),)}),
         (_("Links"), {"fields": ("project_url", "repository_url")}),
         (_("Display"), {"fields": ("released_at", "rank", "is_featured", "is_published")}),

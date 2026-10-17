@@ -24,7 +24,7 @@ class ProfileAdmin(TranslationAdmin):
     save_on_top = True
     fieldsets = (
         (None, {"fields": ("full_name", "headline", "role", "is_active")}),
-        (_("About"), {"fields": ("summary", "bio", "career_started_at", "is_available_for_hire")}),
+        (_("About"), {"fields": ("summary", "bio", "now", "career_started_at", "is_available_for_hire")}),
         (_("Contacts"), {"fields": ("location", "email", "phone", "birth_date")}),
         (_("Media"), {"fields": (("avatar", "avatar_preview"), "hero_image", "resume_file")}),
         (_("SEO"), {"fields": ("meta_description", "meta_keywords"), "classes": ("collapse",)}),

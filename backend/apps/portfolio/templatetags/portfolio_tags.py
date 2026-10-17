@@ -23,3 +23,15 @@ def split_lines(value: str) -> list[str]:
     if not value:
         return []
     return [line.strip() for line in value.splitlines() if line.strip()]
+
+
+@register.filter
+def bare_url(value: str) -> str:
+    """`https://splay.uz/` -> `splay.uz`: a link label without the scheme noise."""
+    if not value:
+        return ""
+    for prefix in ("https://", "http://"):
+        if value.startswith(prefix):
+            value = value[len(prefix) :]
+            break
+    return value.removeprefix("www.").rstrip("/")

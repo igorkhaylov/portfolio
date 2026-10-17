@@ -1,13 +1,11 @@
 {% load i18n %}
-
-<footer id="footer">
-    <div class="container">
-        <div class="copyright">
-            &copy; {% now "Y" %} <strong><span>{{ profile.full_name }}</span></strong>
-        </div>
-        <div class="credits">
-            <!-- BootstrapMade's license requires this attribution to stay in place. -->
-            {% translate "Design" %}: <a href="https://bootstrapmade.com/" rel="nofollow noopener" target="_blank">BootstrapMade</a>
-        </div>
+<footer class="site-footer">
+    <div class="container site-footer__inner">
+        <p>&copy; {% now "Y" %} {{ profile.full_name }}</p>
+        <p class="site-footer__note">
+            {% blocktranslate trimmed with template_url="https://github.com/igorkhaylov/django-template" %}
+                Built on my own <a href="{{ template_url }}">django-template</a>, served from a server I run myself.
+            {% endblocktranslate %}
+        </p>
     </div>
 </footer>

@@ -46,18 +46,18 @@ class Skill(BaseModel):
     level = models.PositiveSmallIntegerField(
         _("Level, %"),
         default=80,
-        help_text=_("0-100, drives the progress bar width."),
+        help_text=_("0-100. Not shown on the site; for your own ordering."),
     )
     icon = models.CharField(
         _("Icon"),
         max_length=50,
         blank=True,
-        help_text=_("Boxicons class, e.g. bxl-python."),
+        help_text=_("Not used by the current design."),
     )
     is_featured = models.BooleanField(
         _("Featured"),
         default=False,
-        help_text=_("Featured skills are shown in the About block."),
+        help_text=_("Highlighted in the stack block."),
     )
     is_published = models.BooleanField(_("Published"), default=True)
 

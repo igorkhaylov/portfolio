@@ -10,6 +10,7 @@ from .models import (
     Course,
     Education,
     Experience,
+    FocusArea,
     Profile,
     Project,
     ProjectCategory,
@@ -17,12 +18,23 @@ from .models import (
     Skill,
     SkillGroup,
     SocialLink,
+    Stat,
 )
 
 
 @register(Profile)
 class ProfileTranslationOptions(TranslationOptions):
-    fields = ("headline", "role", "summary", "bio", "location", "meta_description", "meta_keywords")
+    fields = (
+        "full_name",
+        "headline",
+        "role",
+        "summary",
+        "bio",
+        "now",
+        "location",
+        "meta_description",
+        "meta_keywords",
+    )
 
 
 @register(SocialLink)
@@ -62,9 +74,19 @@ class ProjectCategoryTranslationOptions(TranslationOptions):
 
 @register(Project)
 class ProjectTranslationOptions(TranslationOptions):
-    fields = ("title", "summary", "description", "role", "client", "highlights")
+    fields = ("title", "summary", "description", "role", "client", "period", "highlights")
 
 
 @register(ProjectImage)
 class ProjectImageTranslationOptions(TranslationOptions):
     fields = ("caption",)
+
+
+@register(Stat)
+class StatTranslationOptions(TranslationOptions):
+    fields = ("value", "label", "note")
+
+
+@register(FocusArea)
+class FocusAreaTranslationOptions(TranslationOptions):
+    fields = ("title", "summary", "highlights", "stack")

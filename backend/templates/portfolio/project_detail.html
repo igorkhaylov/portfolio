@@ -1,105 +1,86 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n portfolio_tags %}
 
 {% block title %}{{ project.title }} — {{ profile.full_name }}{% endblock %}
 {% block description %}{{ project.summary|default:project.description|truncatechars:200 }}{% endblock %}
 {% block og_title %}{{ project.title }}{% endblock %}
-{% block og_image %}{% if project.cover %}<meta property="og:image" content="{{ project.cover.large.url }}">{% endif %}{% endblock %}
+{% block og_image %}{% if project.cover %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ project.cover.large.url }}">{% else %}{{ block.super }}{% endif %}{% endblock %}
 
 {% block body %}
-    <main id="main">
-        <section class="breadcrumbs">
-            <div class="container">
-                <ol>
-                    <li><a href="{% url 'portfolio:index' %}">{% translate "Home" %}</a></li>
-                    <li><a href="{% url 'portfolio:index' %}#portfolio">{% translate "Portfolio" %}</a></li>
-                    <li>{{ project.title }}</li>
-                </ol>
-                <h2>{{ project.title }}</h2>
-            </div>
-        </section>
+    <article class="section project-page">
+        <div class="container container--narrow">
+            <a class="back-link" href="{% url 'portfolio:index' %}#projects">
+                <svg class="icon"><use href="#i-arrow-left"></use></svg>{% translate "All projects" %}</a>
 
-        <section id="portfolio-details" class="portfolio-details">
-            <div class="container">
-                <div class="row gy-4">
-
-                    <div class="col-lg-8">
-                        <div class="portfolio-details-slider swiper">
-                            <div class="swiper-wrapper align-items-center">
-                                {% if project.cover %}
-                                    <div class="swiper-slide">
-                                        <img src="{{ project.cover.large.url }}" alt="{{ project.title }}">
-                                    </div>
-                                {% endif %}
-                                {% for image in project.images.all %}
-                                    <div class="swiper-slide">
-                                        <img src="{{ image.image.large.url }}" alt="{{ image.caption|default:project.title }}"
-                                             loading="lazy">
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            <div class="swiper-pagination"></div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="portfolio-info">
-                            <h3>{% translate "Project details" %}</h3>
-                            <ul>
-                                {% if project.category %}<li><strong>{% translate "Category" %}</strong>: {{ project.category.title }}</li>{% endif %}
-                                {% if project.client %}<li><strong>{% translate "Client" %}</strong>: {{ project.client }}</li>{% endif %}
-                                {% if project.role %}<li><strong>{% translate "My role" %}</strong>: {{ project.role }}</li>{% endif %}
-                                {% if project.released_at %}<li><strong>{% translate "Date" %}</strong>: {{ project.released_at|date:"F Y" }}</li>{% endif %}
-                                {% if project.project_url %}
-                                    <li><strong>{% translate "Website" %}</strong>:
-                                        <a href="{{ project.project_url }}" target="_blank" rel="noopener">{{ project.project_url }}</a></li>
-                                {% endif %}
-                                {% if project.repository_url %}
-                                    <li><strong>{% translate "Code" %}</strong>:
-                                        <a href="{{ project.repository_url }}" target="_blank" rel="noopener">GitHub</a></li>
-                                {% endif %}
-                            </ul>
-
-                            {% if project.skills.all %}
-                                <h3 class="mt-4">{% translate "Stack" %}</h3>
-                                <div class="portfolio-stack">
-                                    {% for skill in project.skills.all %}<span class="badge-stack">{{ skill.name }}</span>{% endfor %}
-                                </div>
-                            {% endif %}
-                        </div>
-
-                        <div class="portfolio-description">
-                            {% if project.summary %}<p class="fst-italic">{{ project.summary }}</p>{% endif %}
-                            {% if project.description %}<p>{{ project.description|linebreaks }}</p>{% endif %}
-                            {% if project.highlight_list %}
-                                <ul>{% for point in project.highlight_list %}<li>{{ point }}</li>{% endfor %}</ul>
-                            {% endif %}
-                        </div>
-                    </div>
-
+            <header class="project-page__head">
+                <div class="project__top">
+                    {% if project.category %}<span class="project__category">{{ project.category.title }}</span>{% endif %}
+                    <span class="status status--{{ project.status }}"><span class="dot" aria-hidden="true"></span>{{ project.get_status_display }}</span>
                 </div>
+                <h1>{{ project.title }}</h1>
+                {% if project.summary %}<p class="project-page__lead">{{ project.summary }}</p>{% endif %}
+            </header>
 
-                {% if related_projects %}
-                    <div class="row mt-5">
-                        <div class="col-12">
-                            <h3>{% translate "Other projects" %}</h3>
-                        </div>
-                        {% for item in related_projects %}
-                            <div class="col-lg-4 col-md-6 portfolio-item">
-                                <div class="portfolio-wrap">
-                                    {% if item.cover %}
-                                        <img src="{{ item.cover.medium.url }}" class="img-fluid" alt="{{ item.title }}" loading="lazy">
-                                    {% endif %}
-                                    <div class="portfolio-links">
-                                        <a href="{{ item.get_absolute_url }}" title="{{ item.title }}"><i class="bx bx-link"></i></a>
-                                    </div>
-                                </div>
-                                <div class="portfolio-info"><h4><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h4></div>
-                            </div>
-                        {% endfor %}
-                    </div>
+            <dl class="facts">
+                {% if project.role %}<div><dt>{% translate "My role" %}</dt><dd>{{ project.role }}</dd></div>{% endif %}
+                {% if project.period %}<div><dt>{% translate "Period" %}</dt><dd>{{ project.period }}</dd></div>{% endif %}
+                {% if project.client %}<div><dt>{% translate "Client" %}</dt><dd>{{ project.client }}</dd></div>{% endif %}
+                {% if project.project_url or project.repository_url %}
+                    <div><dt>{% translate "Links" %}</dt><dd class="facts__links">
+                        {% if project.project_url %}<a href="{{ project.project_url }}" rel="noopener" target="_blank">{{ project.project_url|bare_url }}<svg class="icon"><use href="#i-external"></use></svg></a>{% endif %}
+                        {% if project.repository_url %}<a href="{{ project.repository_url }}" rel="noopener" target="_blank">{% translate "Source code" %}<svg class="icon"><use href="#i-external"></use></svg></a>{% endif %}
+                    </dd></div>
                 {% endif %}
+            </dl>
+
+            {% if project.cover %}
+                <figure class="project-page__cover">
+                    <img src="{{ project.cover.large.url }}" alt="{{ project.title }}">
+                </figure>
+            {% endif %}
+
+            {% if project.description %}
+                <div class="prose">{{ project.description|linebreaks }}</div>
+            {% endif %}
+
+            {% if project.highlight_list %}
+                <h2 class="project-page__subtitle">{% translate "What I did" %}</h2>
+                <ul class="checklist">{% for line in project.highlight_list %}<li>{{ line }}</li>{% endfor %}</ul>
+            {% endif %}
+
+            {% if project.skills.all %}
+                <h2 class="project-page__subtitle">{% translate "Stack" %}</h2>
+                <ul class="tags">{% for skill in project.skills.all %}<li>{{ skill.name }}</li>{% endfor %}</ul>
+            {% endif %}
+
+            {% if project.images.all %}
+                <h2 class="project-page__subtitle">{% translate "Screenshots" %}</h2>
+                <div class="gallery">
+                    {% for image in project.images.all %}
+                        <figure>
+                            <a href="{{ image.image.url }}" target="_blank" rel="noopener">
+                                <img src="{{ image.image.large.url }}" alt="{{ image.caption|default:project.title }}" loading="lazy">
+                            </a>
+                            {% if image.caption %}<figcaption>{{ image.caption }}</figcaption>{% endif %}
+                        </figure>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </article>
+
+    {% if related_projects %}
+        <section class="section section--band">
+            <div class="container">
+                <header class="section__head">
+                    <h2>{% translate "More in this category" %}</h2>
+                </header>
+                <div class="grid grid--3 projects">
+                    {% for project in related_projects %}
+                        {% include "portfolio/includes/project_card.html" %}
+                    {% endfor %}
+                </div>
             </div>
         </section>
-    </main>
+    {% endif %}
 {% endblock %}

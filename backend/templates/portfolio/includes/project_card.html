@@ -1,0 +1,32 @@
+{% load i18n portfolio_tags %}
+<article class="card project{% if project.is_featured %} project--featured{% endif %}" data-category="{{ project.category.slug|default:'' }}">
+    <div class="project__top">
+        {% if project.category %}<span class="project__category">{{ project.category.title }}</span>{% endif %}
+        <span class="status status--{{ project.status }}"><span class="dot" aria-hidden="true"></span>{{ project.get_status_display }}</span>
+    </div>
+    <h3 class="project__title"><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h3>
+    {% if project.summary %}<p class="project__summary">{{ project.summary }}</p>{% endif %}
+    {% if project.is_featured and project.highlight_list %}
+        <ul class="bullets">{% for line in project.highlight_list|slice:":4" %}<li>{{ line }}</li>{% endfor %}</ul>
+    {% endif %}
+    <p class="project__meta">
+        {% if project.role %}<span>{{ project.role }}</span>{% endif %}
+        {% if project.period %}<span>{{ project.period }}</span>{% endif %}
+    </p>
+    {% with skills=project.skills.all %}
+        {% if skills %}
+            <ul class="tags tags--small">
+                {% for skill in skills|slice:":7" %}<li>{{ skill.name }}</li>{% endfor %}
+                {% if skills|length > 7 %}<li class="tags__more">+{{ skills|length|add:"-7" }}</li>{% endif %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <div class="project__links">
+        <a href="{{ project.get_absolute_url }}">{% translate "Details" %}<svg class="icon"><use href="#i-arrow-right"></use></svg></a>
+        {% if project.project_url %}
+            <a href="{{ project.project_url }}" rel="noopener" target="_blank">{{ project.project_url|bare_url }}<svg class="icon"><use href="#i-external"></use></svg></a>
+        {% elif project.repository_url %}
+            <a href="{{ project.repository_url }}" rel="noopener" target="_blank">GitHub<svg class="icon"><use href="#i-external"></use></svg></a>
+        {% endif %}
+    </div>
+</article>

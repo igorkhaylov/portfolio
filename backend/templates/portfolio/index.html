@@ -1,19 +1,7 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load static i18n portfolio_tags %}
 
 {% block title %}{{ profile.full_name }} — {{ profile.role|default:_("Portfolio") }}{% endblock %}
-
-{% block body %}
-    {% include "portfolio/sections/hero.html" %}
-
-    <main id="main">
-        {% include "portfolio/sections/about.html" %}
-        {% include "portfolio/sections/skills.html" %}
-        {% include "portfolio/sections/resume.html" %}
-        {% include "portfolio/sections/portfolio.html" %}
-        {% include "portfolio/sections/contact.html" %}
-    </main>
-{% endblock %}
 
 {% block extra_head %}
     {# Structured data: lets search engines render a person card for the site owner. #}
@@ -24,9 +12,289 @@
             "name": "{{ profile.full_name|escapejs }}",
             "jobTitle": "{{ profile.role|escapejs }}",
             "email": "{{ profile.email|escapejs }}",
-            "url": "{{ request.build_absolute_uri|escapejs }}",
+            "telephone": "{{ profile.phone|escapejs }}",
+            "url": "{{ request.scheme }}://{{ request.get_host }}/",
             "address": "{{ profile.location|escapejs }}",
             "sameAs": [{% for link in profile.social_links.all %}"{{ link.url|escapejs }}"{% if not forloop.last %}, {% endif %}{% endfor %}]
         }
     </script>
+{% endblock %}
+
+{% block body %}
+
+    {# ---------------------------------------------------------------- Hero #}
+    <section class="hero">
+        <div class="container hero__grid">
+            <div class="hero__text">
+                <p class="hero__status">
+                    <svg class="icon"><use href="#i-map-pin"></use></svg>
+                    {{ profile.location }}
+                    {% if profile.is_available_for_hire %}
+                        <span class="hero__available"><span class="dot dot--live" aria-hidden="true"></span>{% translate "Open to offers" %}</span>
+                    {% endif %}
+                </p>
+                {% if profile.headline_items %}
+                    <ul class="tags tags--hero" aria-label="{% translate 'Specialisation' %}">
+                        {% for item in profile.headline_items %}<li>{{ item }}</li>{% endfor %}
+                    </ul>
+                {% endif %}
+                <h1 class="hero__name">{{ profile.full_name }}</h1>
+                <p class="hero__role">{{ profile.role }}</p>
+                {% if profile.summary %}<p class="hero__summary">{{ profile.summary }}</p>{% endif %}
+                <div class="hero__actions">
+                    {% with primary=profile.social_links.all|first %}
+                        {% if primary %}
+                            <a class="button button--primary" href="{{ primary.url }}" rel="noopener" target="_blank">
+                                <svg class="icon"><use href="#i-{{ primary.icon }}"></use></svg>
+                                {% blocktranslate with name=primary.title %}Message me on {{ name }}{% endblocktranslate %}
+                            </a>
+                        {% endif %}
+                    {% endwith %}
+                    <a class="button" href="#projects">{% translate "See projects" %}
+                        <svg class="icon"><use href="#i-arrow-right"></use></svg></a>
+                    {% if profile.resume_file %}
+                        <a class="button button--ghost" href="{{ profile.resume_file.url }}" download>
+                            <svg class="icon"><use href="#i-download"></use></svg>{% translate "CV" %}</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="hero__photo">
+                <img src="{% if profile.avatar %}{{ profile.avatar.medium.url }}{% else %}{% static 'img/igor-khaylov.jpg' %}{% endif %}"
+                     width="600" height="600" alt="{{ profile.full_name }}">
+            </div>
+        </div>
+
+        {% if hero_stats %}
+            <div class="container">
+                <dl class="stats stats--hero">
+                    {% for stat in hero_stats %}
+                        <div class="stat">
+                            <dt class="stat__label">{{ stat.label }}</dt>
+                            <dd class="stat__value">{{ stat.value }}</dd>
+                            {% if stat.note %}<dd class="stat__note">{{ stat.note }}</dd>{% endif %}
+                        </div>
+                    {% endfor %}
+                </dl>
+            </div>
+        {% endif %}
+    </section>
+
+    {# --------------------------------------------------------------- About #}
+    <section class="section" id="about">
+        <div class="container">
+            <header class="section__head">
+                <p class="eyebrow">01 · {% translate "About" %}</p>
+                <h2>{% translate "Backend code and the production it runs on" %}</h2>
+            </header>
+            <div class="about">
+                <div class="about__bio prose">
+                    {{ profile.bio|linebreaks }}
+                </div>
+                {% if profile.now %}
+                    <aside class="card now">
+                        <h3 class="card__title"><span class="dot dot--live" aria-hidden="true"></span>{% translate "Right now" %}</h3>
+                        <ul class="checklist">
+                            {% for item in profile.now|split_lines %}<li>{{ item }}</li>{% endfor %}
+                        </ul>
+                    </aside>
+                {% endif %}
+            </div>
+
+            {% if focus_areas %}
+                <div class="grid grid--3 focus">
+                    {% for area in focus_areas %}
+                        {% include "portfolio/includes/area_card.html" %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    {# ------------------------------------------------------ Infrastructure #}
+    {% if infra_stats or infra_areas %}
+        <section class="section section--band" id="infrastructure">
+            <div class="container">
+                <header class="section__head">
+                    <p class="eyebrow">02 · {% translate "Infrastructure" %}</p>
+                    <h2>{% translate "The servers are my responsibility too" %}</h2>
+                    <p class="section__lead">
+                        {% blocktranslate trimmed %}
+                            Every server of the company is in my area: I build, maintain and monitor
+                            the hardware, the virtualisation, the network, storage and delivery that
+                            all of our products run on.
+                        {% endblocktranslate %}
+                    </p>
+                </header>
+                {% if infra_stats %}
+                    <dl class="stats stats--infra">
+                        {% for stat in infra_stats %}
+                            <div class="stat">
+                                <dt class="stat__label">{{ stat.label }}</dt>
+                                <dd class="stat__value">{{ stat.value }}</dd>
+                                {% if stat.note %}<dd class="stat__note">{{ stat.note }}</dd>{% endif %}
+                            </div>
+                        {% endfor %}
+                    </dl>
+                {% endif %}
+                {% if infra_areas %}
+                    <div class="grid grid--2">
+                        {% for area in infra_areas %}
+                            {% include "portfolio/includes/area_card.html" %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+    {% endif %}
+
+    {# ------------------------------------------------------------ Projects #}
+    {% if projects %}
+        <section class="section" id="projects">
+            <div class="container">
+                <header class="section__head">
+                    <p class="eyebrow">03 · {% translate "Projects" %}</p>
+                    <h2>{% translate "What I have built and keep running" %}</h2>
+                    <p class="section__lead">
+                        {% blocktranslate trimmed count counter=projects|length %}
+                            {{ counter }} project: products in production, internal systems, open source.
+                        {% plural %}
+                            {{ counter }} projects: products in production, internal systems, open source.
+                        {% endblocktranslate %}
+                    </p>
+                </header>
+
+                {% if categories %}
+                    <div class="filters" role="toolbar" aria-label="{% translate 'Filter projects' %}" data-filters>
+                        <button type="button" class="chip" data-filter="*" aria-pressed="true">{% translate "All" %}</button>
+                        {% for category in categories %}
+                            <button type="button" class="chip" data-filter="{{ category.slug }}" aria-pressed="false">{{ category.title }}</button>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="grid grid--3 projects" data-projects>
+                    {% for project in projects %}
+                        {% include "portfolio/includes/project_card.html" %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {# ---------------------------------------------------------- Experience #}
+    <section class="section section--band" id="experience">
+        <div class="container">
+            <header class="section__head">
+                <p class="eyebrow">04 · {% translate "Experience" %}</p>
+                <h2>{% translate "Experience and education" %}</h2>
+            </header>
+            <div class="resume">
+                <ol class="timeline">
+                    {% for item in experiences %}
+                        <li class="timeline__item">
+                            <p class="timeline__period">{{ item.period }}</p>
+                            <h3 class="timeline__title">{{ item.position }}</h3>
+                            <p class="timeline__meta">
+                                {% if item.company_url %}<a href="{{ item.company_url }}" rel="noopener" target="_blank">{{ item.company }}</a>{% else %}{{ item.company }}{% endif %}{% if item.location %} · {{ item.location }}{% endif %}
+                            </p>
+                            {% if item.description %}<p>{{ item.description }}</p>{% endif %}
+                            {% if item.highlight_list %}
+                                <ul class="bullets">{% for line in item.highlight_list %}<li>{{ line }}</li>{% endfor %}</ul>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ol>
+                <div class="resume__side">
+                    {% if educations %}
+                        <div class="card">
+                            <h3 class="card__title">{% translate "Education" %}</h3>
+                            {% for item in educations %}
+                                <div class="entry">
+                                    <p class="entry__period">{{ item.period }}</p>
+                                    <p class="entry__title">{{ item.institution }}</p>
+                                    <p class="entry__meta">{{ item.degree }}{% if item.speciality %} · {{ item.speciality }}{% endif %}</p>
+                                    {% if item.description %}<p class="entry__meta">{{ item.description }}</p>{% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% if courses %}
+                        <div class="card">
+                            <h3 class="card__title">{% translate "Self-education" %}</h3>
+                            {% for item in courses %}
+                                <div class="entry">
+                                    <p class="entry__period">{{ item.period }}</p>
+                                    <p class="entry__title">{% if item.url %}<a href="{{ item.url }}" rel="noopener" target="_blank">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</p>
+                                    {% if item.provider %}<p class="entry__meta">{{ item.provider }}</p>{% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# -------------------------------------------------------------- Skills #}
+    {% if skill_groups %}
+        <section class="section" id="skills">
+            <div class="container">
+                <header class="section__head">
+                    <p class="eyebrow">05 · {% translate "Stack" %}</p>
+                    <h2>{% translate "Technologies I work with every day" %}</h2>
+                </header>
+                <div class="grid grid--3">
+                    {% for group in skill_groups %}
+                        {% if group.skills.all %}
+                            <div class="card">
+                                <h3 class="card__title">{{ group.title }}</h3>
+                                <ul class="tags">
+                                    {% for skill in group.skills.all %}
+                                        <li{% if skill.is_featured %} class="is-key"{% endif %}>{{ skill.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {# ------------------------------------------------------------- Contact #}
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="contact card">
+                <div class="contact__text">
+                    <p class="eyebrow">06 · {% translate "Contact" %}</p>
+                    <h2>{% translate "Let's talk" %}</h2>
+                    <p>{% blocktranslate trimmed %}
+                        A backend that has to hold the load, infrastructure to build or put in order,
+                        a project to bring to production — write to me. Telegram is the fastest way.
+                    {% endblocktranslate %}</p>
+                </div>
+                <ul class="contact__list">
+                    {% for link in profile.social_links.all %}
+                        <li><a class="contact__item" href="{{ link.url }}" rel="noopener" target="_blank">
+                            <svg class="icon"><use href="#i-{{ link.icon }}"></use></svg>
+                            <span><strong>{{ link.title }}</strong><small>{{ link.url|bare_url }}</small></span>
+                        </a></li>
+                    {% endfor %}
+                    {% if profile.email %}
+                        <li><a class="contact__item" href="mailto:{{ profile.email }}">
+                            <svg class="icon"><use href="#i-mail"></use></svg>
+                            <span><strong>{% translate "Email" %}</strong><small>{{ profile.email }}</small></span>
+                        </a></li>
+                    {% endif %}
+                    {% if profile.phone %}
+                        <li><a class="contact__item" href="tel:{{ profile.phone|cut:' '|cut:'-' }}">
+                            <svg class="icon"><use href="#i-phone"></use></svg>
+                            <span><strong>{% translate "Phone" %}</strong><small>{{ profile.phone }}</small></span>
+                        </a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </section>
+
 {% endblock %}

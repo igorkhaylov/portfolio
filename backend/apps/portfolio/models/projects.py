@@ -48,7 +48,10 @@ class ProjectQuerySet(models.QuerySet):
         return self.select_related("category")
 
     def with_skills(self):
-        return self.prefetch_related(models.Prefetch("skills", queryset=Skill.objects.published().order_by("rank")))
+        # Group order first (backend, infrastructure, ...), so card tags read in a stable order.
+        return self.prefetch_related(
+            models.Prefetch("skills", queryset=Skill.objects.published().order_by("group__rank", "rank"))
+        )
 
     def with_images(self):
         return self.prefetch_related(models.Prefetch("images", queryset=ProjectImage.objects.order_by("rank")))
@@ -59,6 +62,13 @@ class ProjectQuerySet(models.QuerySet):
 
 
 class Project(HighlightsMixin, BaseModel):
+    class Status(models.TextChoices):
+        LIVE = "live", _("In production")
+        INTERNAL = "internal", _("Internal system")
+        DEVELOPMENT = "development", _("In development")
+        OPEN_SOURCE = "open_source", _("Open source")
+        ARCHIVED = "archived", _("Archive")
+
     title = models.CharField(_("Title"), max_length=150)
     slug = models.SlugField(_("Slug"), max_length=150, unique=True)
     category = models.ForeignKey(
@@ -73,6 +83,8 @@ class Project(HighlightsMixin, BaseModel):
     description = models.TextField(_("Description"), blank=True)
     role = models.CharField(_("My role"), max_length=150, blank=True)
     client = models.CharField(_("Client"), max_length=150, blank=True)
+    status = models.CharField(_("Status"), max_length=20, choices=Status.choices, default=Status.LIVE)
+    period = models.CharField(_("Period"), max_length=50, blank=True, help_text=_("Free text: 2022 — now."))
 
     cover = StdImageField(_("Cover"), upload_to="projects/cover/", blank=True, null=True)
     project_url = models.URLField(_("Live URL"), blank=True)

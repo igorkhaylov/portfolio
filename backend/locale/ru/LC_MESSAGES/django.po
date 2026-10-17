@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-02 16:55+0500\n"
+"POT-Creation-Date: 2026-10-17 12:37+0500\n"
 "PO-Revision-Date: 2026-07-02 16:55+0500\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
@@ -13,9 +13,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: apps/common/models.py:19
 msgid "Unique identifier"
@@ -37,24 +35,740 @@ msgstr "Порядок"
 msgid "Lower appears first; use to control display order."
 msgstr "Меньшее значение отображается первым; управляет порядком вывода."
 
-#: config/settings/base.py:225
-msgid "English"
-msgstr "Английский"
+#: apps/portfolio/admin/profile.py:27 templates/includes/header.html:11
+#: templates/portfolio/index.html:86
+msgid "About"
+msgstr "Обо мне"
 
-#: config/settings/base.py:226
+#: apps/portfolio/admin/profile.py:28
+msgid "Contacts"
+msgstr "Контакты"
+
+#: apps/portfolio/admin/profile.py:29 apps/portfolio/admin/projects.py:57
+msgid "Media"
+msgstr "Медиа"
+
+#: apps/portfolio/admin/profile.py:30
+msgid "SEO"
+msgstr "SEO"
+
+#: apps/portfolio/admin/profile.py:31 apps/portfolio/admin/projects.py:60
+msgid "Service"
+msgstr "Служебное"
+
+#: apps/portfolio/admin/profile.py:34 apps/portfolio/admin/projects.py:18
+#: apps/portfolio/admin/projects.py:63
+msgid "Preview"
+msgstr "Превью"
+
+#: apps/portfolio/admin/projects.py:29
+msgid "Stack item"
+msgstr "Технология"
+
+#: apps/portfolio/admin/projects.py:30 apps/portfolio/models/projects.py:94
+#: apps/portfolio/models/showcase.py:85 templates/portfolio/index.html:243
+#: templates/portfolio/project_detail.html:52
+msgid "Stack"
+msgstr "Стек"
+
+#: apps/portfolio/admin/projects.py:56 apps/portfolio/admin/resume.py:35
+#: apps/portfolio/admin/resume.py:47 apps/portfolio/admin/resume.py:59
+msgid "Content"
+msgstr "Содержимое"
+
+#: apps/portfolio/admin/projects.py:58
+#: templates/portfolio/project_detail.html:29
+msgid "Links"
+msgstr "Ссылки"
+
+#: apps/portfolio/admin/projects.py:59 apps/portfolio/admin/resume.py:36
+#: apps/portfolio/admin/resume.py:48 apps/portfolio/admin/resume.py:60
+#: apps/portfolio/admin/showcase.py:29
+msgid "Display"
+msgstr "Отображение"
+
+#: apps/portfolio/admin/resume.py:34 apps/portfolio/admin/resume.py:46
+#: apps/portfolio/admin/resume.py:58 apps/portfolio/models/projects.py:84
+#: templates/portfolio/project_detail.html:26
+msgid "Period"
+msgstr "Период"
+
+#: apps/portfolio/admin/showcase.py:28
+#: templates/portfolio/includes/project_card.html:25
+msgid "Details"
+msgstr "Подробнее"
+
+#: apps/portfolio/apps.py:8 templates/portfolio/index.html:4
+msgid "Portfolio"
+msgstr "Портфолио"
+
+#: apps/portfolio/models/mixins.py:15
+msgid "Highlights"
+msgstr "Ключевые пункты"
+
+#: apps/portfolio/models/mixins.py:17
+msgid "One bullet point per line. Blank lines are ignored."
+msgstr "Один пункт на строку. Пустые строки игнорируются."
+
+#: apps/portfolio/models/profile.py:39
+msgid "Full name"
+msgstr "Полное имя"
+
+#: apps/portfolio/models/profile.py:41
+msgid "Headline"
+msgstr "Направления"
+
+#: apps/portfolio/models/profile.py:44
+msgid ""
+"Rotating job titles in the hero, comma-separated: Backend Developer, Python "
+"Developer"
+msgstr ""
+"Теги над именем в шапке, через запятую: Python · Django, Платформа и DevOps"
+
+#: apps/portfolio/models/profile.py:47
+msgid "Role"
+msgstr "Роль"
+
+#: apps/portfolio/models/profile.py:50
+msgid ""
+"Short title under the About heading, e.g. Python Developer & Web Developer."
+msgstr ""
+"Строка под именем, например «Backend-разработчик и инженер инфраструктуры»."
+
+#: apps/portfolio/models/profile.py:52 apps/portfolio/models/projects.py:79
+#: apps/portfolio/models/showcase.py:82
+msgid "Summary"
+msgstr "Кратко"
+
+#: apps/portfolio/models/profile.py:52
+msgid "Two or three sentences for the About block."
+msgstr "Два-три предложения для первого экрана."
+
+#: apps/portfolio/models/profile.py:53
+msgid "Biography"
+msgstr "Биография"
+
+#: apps/portfolio/models/profile.py:53
+msgid "Longer text for the About block."
+msgstr "Развёрнутый текст для блока «Обо мне»."
+
+#: apps/portfolio/models/profile.py:55
+msgid "Now"
+msgstr "Сейчас"
+
+#: apps/portfolio/models/profile.py:57
+msgid "What I am working on right now — one item per line."
+msgstr "Чем занимаюсь сейчас — по пункту на строку."
+
+#: apps/portfolio/models/profile.py:60 apps/portfolio/models/resume.py:49
+msgid "Location"
+msgstr "Город"
+
+#: apps/portfolio/models/profile.py:61 templates/portfolio/index.html:286
+msgid "Email"
+msgstr "Email"
+
+#: apps/portfolio/models/profile.py:62 templates/portfolio/index.html:292
+msgid "Phone"
+msgstr "Телефон"
+
+#: apps/portfolio/models/profile.py:63
+msgid "Date of birth"
+msgstr "Дата рождения"
+
+#: apps/portfolio/models/profile.py:65
+msgid "Career start year"
+msgstr "Год начала карьеры"
+
+#: apps/portfolio/models/profile.py:68
+msgid "Used to render years of experience automatically."
+msgstr "Из него автоматически считается стаж."
+
+#: apps/portfolio/models/profile.py:70
+msgid "Open to work"
+msgstr "Открыт к предложениям"
+
+#: apps/portfolio/models/profile.py:72
+msgid "Avatar"
+msgstr "Фото"
+
+#: apps/portfolio/models/profile.py:73
+msgid "Hero background"
+msgstr "Фон шапки"
+
+#: apps/portfolio/models/profile.py:74
+msgid "CV file"
+msgstr "Файл резюме"
+
+#: apps/portfolio/models/profile.py:77
+msgid "Meta description"
+msgstr "Meta description"
+
+#: apps/portfolio/models/profile.py:80
+msgid "Used in <meta name=\"description\"> and social previews."
+msgstr "Используется в <meta name=\"description\"> и превью в соцсетях."
+
+#: apps/portfolio/models/profile.py:82
+msgid "Meta keywords"
+msgstr "Meta keywords"
+
+#: apps/portfolio/models/profile.py:85 apps/portfolio/models/profile.py:129
+msgid "Active"
+msgstr "Активен"
+
+#: apps/portfolio/models/profile.py:87
+msgid "The site renders the first active profile."
+msgstr "Сайт показывает первый активный профиль."
+
+#: apps/portfolio/models/profile.py:93 apps/portfolio/models/profile.py:94
+#: apps/portfolio/models/profile.py:119
+msgid "Profile"
+msgstr "Профиль"
+
+#: apps/portfolio/models/profile.py:121 apps/portfolio/models/projects.py:26
+#: apps/portfolio/models/projects.py:69 apps/portfolio/models/resume.py:84
+#: apps/portfolio/models/showcase.py:81 apps/portfolio/models/skills.py:23
+msgid "Title"
+msgstr "Название"
+
+#: apps/portfolio/models/profile.py:122
+msgid "URL"
+msgstr "URL"
+
+#: apps/portfolio/models/profile.py:124 apps/portfolio/models/showcase.py:83
+#: apps/portfolio/models/skills.py:52
+msgid "Icon"
+msgstr "Иконка"
+
+#: apps/portfolio/models/profile.py:127
+msgid "Icon name from the site sprite: telegram, github, link."
+msgstr "Имя иконки из спрайта сайта: telegram, github, link."
+
+#: apps/portfolio/models/profile.py:132
+msgid "Social link"
+msgstr "Ссылка"
+
+#: apps/portfolio/models/profile.py:133
+msgid "Social links"
+msgstr "Ссылки"
+
+#: apps/portfolio/models/projects.py:27 apps/portfolio/models/projects.py:70
+msgid "Slug"
+msgstr "Slug"
+
+#: apps/portfolio/models/projects.py:28 apps/portfolio/models/projects.py:100
+#: apps/portfolio/models/resume.py:27 apps/portfolio/models/showcase.py:50
+#: apps/portfolio/models/showcase.py:90 apps/portfolio/models/skills.py:24
+#: apps/portfolio/models/skills.py:62
+msgid "Published"
+msgstr "Опубликовано"
+
+#: apps/portfolio/models/projects.py:33
+msgid "Project category"
+msgstr "Категория проектов"
+
+#: apps/portfolio/models/projects.py:34
+msgid "Project categories"
+msgstr "Категории проектов"
+
+#: apps/portfolio/models/projects.py:63
+msgid "In production"
+msgstr "В продакшене"
+
+#: apps/portfolio/models/projects.py:64
+msgid "Internal system"
+msgstr "Внутренняя система"
+
+#: apps/portfolio/models/projects.py:65
+msgid "In development"
+msgstr "В разработке"
+
+#: apps/portfolio/models/projects.py:66
+msgid "Open source"
+msgstr "Open source"
+
+#: apps/portfolio/models/projects.py:67
+msgid "Archive"
+msgstr "Архив"
+
+#: apps/portfolio/models/projects.py:75
+msgid "Category"
+msgstr "Категория"
+
+#: apps/portfolio/models/projects.py:80 apps/portfolio/models/resume.py:50
+#: apps/portfolio/models/resume.py:69 apps/portfolio/models/resume.py:86
+msgid "Description"
+msgstr "Описание"
+
+#: apps/portfolio/models/projects.py:81
+#: templates/portfolio/project_detail.html:25
+msgid "My role"
+msgstr "Моя роль"
+
+#: apps/portfolio/models/projects.py:82
+#: templates/portfolio/project_detail.html:27
+msgid "Client"
+msgstr "Заказчик"
+
+#: apps/portfolio/models/projects.py:83
+msgid "Status"
+msgstr "Статус"
+
+#: apps/portfolio/models/projects.py:84
+msgid "Free text: 2022 — now."
+msgstr "Свободный текст: 2022 — н.в."
+
+#: apps/portfolio/models/projects.py:86
+msgid "Cover"
+msgstr "Обложка"
+
+#: apps/portfolio/models/projects.py:87
+msgid "Live URL"
+msgstr "Сайт"
+
+#: apps/portfolio/models/projects.py:88
+msgid "Repository URL"
+msgstr "Репозиторий"
+
+#: apps/portfolio/models/projects.py:98
+msgid "Release date"
+msgstr "Дата запуска"
+
+#: apps/portfolio/models/projects.py:99 apps/portfolio/models/skills.py:58
+msgid "Featured"
+msgstr "На витрине"
+
+#: apps/portfolio/models/projects.py:105 apps/portfolio/models/projects.py:138
+msgid "Project"
+msgstr "Проект"
+
+#: apps/portfolio/models/projects.py:106 templates/includes/header.html:13
+#: templates/portfolio/index.html:155
+msgid "Projects"
+msgstr "Проекты"
+
+#: apps/portfolio/models/projects.py:123
+msgid "Project stack item"
+msgstr "Технология проекта"
+
+#: apps/portfolio/models/projects.py:124
+msgid "Project stack"
+msgstr "Стек проекта"
+
+#: apps/portfolio/models/projects.py:140
+msgid "Image"
+msgstr "Изображение"
+
+#: apps/portfolio/models/projects.py:141
+msgid "Caption"
+msgstr "Подпись"
+
+#: apps/portfolio/models/projects.py:144
+msgid "Project image"
+msgstr "Изображение проекта"
+
+#: apps/portfolio/models/projects.py:145
+msgid "Project images"
+msgstr "Изображения проекта"
+
+#: apps/portfolio/models/resume.py:19
+msgid "Start date"
+msgstr "Начало"
+
+#: apps/portfolio/models/resume.py:21
+msgid "End date"
+msgstr "Окончание"
+
+#: apps/portfolio/models/resume.py:24
+msgid "Leave empty for an ongoing period."
+msgstr "Оставьте пустым, если период продолжается."
+
+#: apps/portfolio/models/resume.py:26
+msgid "Ongoing"
+msgstr "По настоящее время"
+
+#: apps/portfolio/models/resume.py:37
+#, python-format
+msgid "%(start)s — Present"
+msgstr "%(start)s — н.в."
+
+#: apps/portfolio/models/resume.py:37
+msgid "Present"
+msgstr "н.в."
+
+#: apps/portfolio/models/resume.py:47
+msgid "Position"
+msgstr "Должность"
+
+#: apps/portfolio/models/resume.py:48
+msgid "Company"
+msgstr "Компания"
+
+#: apps/portfolio/models/resume.py:51
+msgid "Company URL"
+msgstr "Сайт компании"
+
+#: apps/portfolio/models/resume.py:56 apps/portfolio/models/resume.py:57
+#: templates/includes/header.html:14 templates/portfolio/index.html:188
+msgid "Experience"
+msgstr "Опыт"
+
+#: apps/portfolio/models/resume.py:66
+msgid "Institution"
+msgstr "Учебное заведение"
+
+#: apps/portfolio/models/resume.py:67
+msgid "Degree"
+msgstr "Уровень"
+
+#: apps/portfolio/models/resume.py:68
+msgid "Speciality"
+msgstr "Специальность"
+
+#: apps/portfolio/models/resume.py:74 apps/portfolio/models/resume.py:75
+#: templates/portfolio/index.html:210
+msgid "Education"
+msgstr "Образование"
+
+#: apps/portfolio/models/resume.py:85
+msgid "Provider"
+msgstr "Где"
+
+#: apps/portfolio/models/resume.py:87
+msgid "Certificate or course URL"
+msgstr "Ссылка на курс или сертификат"
+
+#: apps/portfolio/models/resume.py:92
+msgid "Course"
+msgstr "Курс"
+
+#: apps/portfolio/models/resume.py:93
+msgid "Courses"
+msgstr "Курсы"
+
+#: apps/portfolio/models/showcase.py:13
+msgid "Code"
+msgstr "Код"
+
+#: apps/portfolio/models/showcase.py:14
+msgid "Server"
+msgstr "Сервер"
+
+#: apps/portfolio/models/showcase.py:15
+msgid "Layers"
+msgstr "Слои"
+
+#: apps/portfolio/models/showcase.py:16
+msgid "Database"
+msgstr "База данных"
+
+#: apps/portfolio/models/showcase.py:17
+msgid "Activity"
+msgstr "Активность"
+
+#: apps/portfolio/models/showcase.py:18
+msgid "CPU / GPU"
+msgstr "CPU / GPU"
+
+#: apps/portfolio/models/showcase.py:19
+msgid "Video"
+msgstr "Видео"
+
+#: apps/portfolio/models/showcase.py:20
+msgid "Shield"
+msgstr "Щит"
+
+#: apps/portfolio/models/showcase.py:21
+msgid "Globe"
+msgstr "Глобус"
+
+#: apps/portfolio/models/showcase.py:22
+msgid "Git"
+msgstr "Git"
+
+#: apps/portfolio/models/showcase.py:23
+msgid "Terminal"
+msgstr "Терминал"
+
+#: apps/portfolio/models/showcase.py:24
+msgid "Package"
+msgstr "Пакет"
+
+#: apps/portfolio/models/showcase.py:43
+msgid "Hero"
+msgstr "Первый экран"
+
+#: apps/portfolio/models/showcase.py:44 apps/portfolio/models/showcase.py:78
+#: templates/includes/header.html:12 templates/portfolio/index.html:118
+msgid "Infrastructure"
+msgstr "Инфраструктура"
+
+#: apps/portfolio/models/showcase.py:46 apps/portfolio/models/showcase.py:80
+msgid "Section"
+msgstr "Раздел"
+
+#: apps/portfolio/models/showcase.py:47
+msgid "Value"
+msgstr "Значение"
+
+#: apps/portfolio/models/showcase.py:47
+msgid "Shown large: 10, ~100, 1.4 PB."
+msgstr "Крупная цифра: 10, ~100, 1,4 ПБ."
+
+#: apps/portfolio/models/showcase.py:48
+msgid "Label"
+msgstr "Подпись"
+
+#: apps/portfolio/models/showcase.py:49
+msgid "Note"
+msgstr "Примечание"
+
+#: apps/portfolio/models/showcase.py:49
+msgid "Small print under the label."
+msgstr "Мелкий текст под подписью."
+
+#: apps/portfolio/models/showcase.py:55
+msgid "Stat"
+msgstr "Цифра"
+
+#: apps/portfolio/models/showcase.py:56
+msgid "Stats"
+msgstr "Цифры"
+
+#: apps/portfolio/models/showcase.py:77
+msgid "What I do"
+msgstr "Чем занимаюсь"
+
+#: apps/portfolio/models/showcase.py:88
+msgid "Technologies shown as tags, comma-separated."
+msgstr "Технологии тегами, через запятую."
+
+#: apps/portfolio/models/showcase.py:95
+msgid "Focus area"
+msgstr "Направление"
+
+#: apps/portfolio/models/showcase.py:96
+msgid "Focus areas"
+msgstr "Направления"
+
+#: apps/portfolio/models/skills.py:27
+msgid "Skill group"
+msgstr "Группа навыков"
+
+#: apps/portfolio/models/skills.py:28
+msgid "Skill groups"
+msgstr "Группы навыков"
+
+#: apps/portfolio/models/skills.py:41
+msgid "Group"
+msgstr "Группа"
+
+#: apps/portfolio/models/skills.py:45
+msgid "Name"
+msgstr "Название"
+
+#: apps/portfolio/models/skills.py:47
+msgid "Level, %"
+msgstr "Уровень, %"
+
+#: apps/portfolio/models/skills.py:49
+msgid "0-100. Not shown on the site; for your own ordering."
+msgstr "0–100. На сайте не показывается, для вашего удобства."
+
+#: apps/portfolio/models/skills.py:55
+msgid "Not used by the current design."
+msgstr "В текущем дизайне не используется."
+
+#: apps/portfolio/models/skills.py:60
+msgid "Highlighted in the stack block."
+msgstr "Выделяется в блоке «Стек»."
+
+#: apps/portfolio/models/skills.py:67
+msgid "Skill"
+msgstr "Навык"
+
+#: apps/portfolio/models/skills.py:68
+msgid "Skills"
+msgstr "Навыки"
+
+#: config/settings/base.py:241
 msgid "Русский"
 msgstr "Русский"
 
-#: config/urls.py:27
+#: config/settings/base.py:242
+msgid "English"
+msgstr "Английский"
+
+#: config/urls.py:41
 #, python-format
 msgid "%(app_name)s site admin"
 msgstr "Администрирование сайта %(app_name)s"
 
-#: config/urls.py:28
+#: config/urls.py:42
 #, python-format
 msgid "%(app_name)s administration"
 msgstr "Администрирование %(app_name)s"
 
-#: config/urls.py:29
+#: config/urls.py:43
 msgid "Site administration"
 msgstr "Администрирование сайта"
+
+#: templates/404.html:10
+msgid "This page does not exist."
+msgstr "Такой страницы нет."
+
+#: templates/404.html:11
+msgid "Back to home"
+msgstr "На главную"
+
+#: templates/base.html:49
+msgid "Skip to content"
+msgstr "К содержимому"
+
+#: templates/includes/footer.html:6
+#, python-format
+msgid ""
+"Built on my own <a href=\"%(template_url)s\">django-template</a>, served "
+"from a server I run myself."
+msgstr ""
+"Сделано на моём <a href=\"%(template_url)s\">django-template</a> и работает "
+"на сервере, который я администрирую сам."
+
+#: templates/includes/header.html:10
+msgid "Main navigation"
+msgstr "Основная навигация"
+
+#: templates/includes/header.html:15 templates/portfolio/index.html:269
+msgid "Contact"
+msgstr "Контакты"
+
+#: templates/includes/header.html:19
+msgid "Language"
+msgstr "Язык"
+
+#: templates/includes/header.html:27
+msgid "Switch theme"
+msgstr "Сменить тему"
+
+#: templates/includes/header.html:32
+msgid "Menu"
+msgstr "Меню"
+
+#: templates/portfolio/index.html:33
+msgid "Open to offers"
+msgstr "Открыт к предложениям"
+
+#: templates/portfolio/index.html:37
+#| msgid "Site administration"
+msgid "Specialisation"
+msgstr "Специализация"
+
+#: templates/portfolio/index.html:49
+#, python-format
+msgid "Message me on %(name)s"
+msgstr "Написать в %(name)s"
+
+#: templates/portfolio/index.html:53
+msgid "See projects"
+msgstr "Смотреть проекты"
+
+#: templates/portfolio/index.html:57
+msgid "CV"
+msgstr "Резюме"
+
+#: templates/portfolio/index.html:87
+msgid "Backend code and the production it runs on"
+msgstr "Backend-код и продакшен, на котором он работает"
+
+#: templates/portfolio/index.html:95
+msgid "Right now"
+msgstr "Сейчас в работе"
+
+#: templates/portfolio/index.html:119
+msgid "The servers are my responsibility too"
+msgstr "Серверы — тоже моя зона ответственности"
+
+#: templates/portfolio/index.html:121
+msgid ""
+"Every server of the company is in my area: I build, maintain and monitor the"
+" hardware, the virtualisation, the network, storage and delivery that all of"
+" our products run on."
+msgstr ""
+"Все серверы компании — в моей зоне ответственности: я собираю, сопровождаю и"
+" мониторю железо, виртуализацию, сеть, хранилища и доставку кода, на которых"
+" работают все наши продукты."
+
+#: templates/portfolio/index.html:156
+msgid "What I have built and keep running"
+msgstr "Что я построил и поддерживаю"
+
+#: templates/portfolio/index.html:158
+#, python-format
+msgid ""
+"%(counter)s project: products in production, internal systems, open source."
+msgid_plural ""
+"%(counter)s projects: products in production, internal systems, open source."
+msgstr[0] ""
+"%(counter)s проект: продукты в продакшене, внутренние системы, open source."
+msgstr[1] ""
+"%(counter)s проекта: продукты в продакшене, внутренние системы, open source."
+msgstr[2] ""
+"%(counter)s проектов: продукты в продакшене, внутренние системы, open "
+"source."
+msgstr[3] ""
+"%(counter)s проектов: продукты в продакшене, внутренние системы, open "
+"source."
+
+#: templates/portfolio/index.html:167
+msgid "Filter projects"
+msgstr "Фильтр проектов"
+
+#: templates/portfolio/index.html:168
+msgid "All"
+msgstr "Все"
+
+#: templates/portfolio/index.html:189
+msgid "Experience and education"
+msgstr "Опыт и образование"
+
+#: templates/portfolio/index.html:223
+msgid "Self-education"
+msgstr "Самообразование"
+
+#: templates/portfolio/index.html:244
+msgid "Technologies I work with every day"
+msgstr "Технологии, с которыми работаю каждый день"
+
+#: templates/portfolio/index.html:270
+msgid "Let's talk"
+msgstr "Давайте обсудим"
+
+#: templates/portfolio/index.html:271
+msgid ""
+"A backend that has to hold the load, infrastructure to build or put in "
+"order, a project to bring to production — write to me. Telegram is the "
+"fastest way."
+msgstr ""
+"Backend, который должен держать нагрузку, инфраструктура, которую нужно "
+"построить или привести в порядок, проект, который пора довести до "
+"продакшена, — напишите мне. Быстрее всего в Telegram."
+
+#: templates/portfolio/project_detail.html:13
+msgid "All projects"
+msgstr "Все проекты"
+
+#: templates/portfolio/project_detail.html:31
+msgid "Source code"
+msgstr "Исходный код"
+
+#: templates/portfolio/project_detail.html:47
+msgid "What I did"
+msgstr "Что сделано"
+
+#: templates/portfolio/project_detail.html:57
+msgid "Screenshots"
+msgstr "Скриншоты"
+
+#: templates/portfolio/project_detail.html:76
+msgid "More in this category"
+msgstr "Ещё в этой категории"

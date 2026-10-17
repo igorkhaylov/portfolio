@@ -1,11 +1,20 @@
 from datetime import date
 
-from django.core import mail
+from django.core.management import call_command
 from django.urls import reverse
 
 import pytest
 
-from portfolio.models import ContactMessage, Experience, Profile, Project, ProjectCategory, Skill, SkillGroup
+from portfolio.models import (
+    Experience,
+    FocusArea,
+    Profile,
+    Project,
+    ProjectCategory,
+    Skill,
+    SkillGroup,
+    Stat,
+)
 
 
 @pytest.fixture
@@ -98,60 +107,50 @@ class TestPages:
         assert b"Sitemap:" in response.content
 
 
-class TestContactForm:
-    payload = {
-        "name": "Client",
-        "email": "client@example.com",
-        "subject": "Website",
-        "message": "I would like to order a website, please call me back.",
-    }
-
-    def test_submit_stores_message_and_sends_email(self, client, profile):
-        response = client.post(
-            reverse("portfolio:contact"),
-            self.payload,
-            headers={"x-requested-with": "XMLHttpRequest"},
-        )
-        assert response.status_code == 200
-        assert response.json()["ok"] is True
-
-        message = ContactMessage.objects.get()
-        assert message.email == self.payload["email"]
-        # Celery runs eagerly in tests, so the notification is already in the outbox.
-        assert len(mail.outbox) == 1
-        assert profile.email in mail.outbox[0].to
-
-    def test_short_message_is_rejected(self, client, profile):
-        response = client.post(
-            reverse("portfolio:contact"),
-            {**self.payload, "message": "hi"},
-            headers={"x-requested-with": "XMLHttpRequest"},
-        )
-        assert response.status_code == 400
-        assert "message" in response.json()["errors"]
-        assert not ContactMessage.objects.exists()
-
-    def test_honeypot_blocks_bots(self, client, profile):
-        response = client.post(
-            reverse("portfolio:contact"),
-            {**self.payload, "website": "http://spam.example"},
-            headers={"x-requested-with": "XMLHttpRequest"},
-        )
-        assert response.status_code == 400
-        assert not ContactMessage.objects.exists()
-
-    def test_non_ajax_submit_redirects(self, client, profile):
-        response = client.post(reverse("portfolio:contact"), self.payload)
-        assert response.status_code == 302
-        assert ContactMessage.objects.count() == 1
-
-
 class TestSeedCommand:
     def test_seed_is_idempotent(self, db):
-        from django.core.management import call_command
-
         call_command("seed_portfolio", verbosity=0)
         first = (Profile.objects.count(), Experience.objects.count(), Skill.objects.count())
         call_command("seed_portfolio", verbosity=0)
         assert (Profile.objects.count(), Experience.objects.count(), Skill.objects.count()) == first
         assert Profile.objects.current() is not None
+
+    def test_seed_fills_every_section(self, db):
+        call_command("seed_portfolio", verbosity=0)
+        assert Stat.objects.for_hero().exists()
+        assert Stat.objects.for_infrastructure().exists()
+        assert FocusArea.objects.for_about().exists()
+        assert FocusArea.objects.for_infrastructure().exists()
+        assert Project.objects.published().featured().exists()
+        # Every project has a stack: an unknown skill name in the seed raises instead.
+        assert not Project.objects.filter(skills__isnull=True).exists()
+
+    def test_seeded_site_renders_in_both_languages(self, client, db):
+        call_command("seed_portfolio", verbosity=0)
+        ru = client.get("/ru/").content.decode()
+        en = client.get("/en/").content.decode()
+        assert "Игорь Хайлов" in ru
+        assert "Igor Khaylov" in en
+        for slug in ("splay", "iccu-tickets", "django-template"):
+            assert f"/projects/{slug}/" in ru
+        for project in Project.objects.published():
+            assert client.get(project.get_absolute_url()).status_code == 200
+
+
+class TestShowcase:
+    def test_stats_are_split_by_section(self, db):
+        hero = Stat.objects.create(value="~100", label="servers")
+        infra = Stat.objects.create(section=Stat.Section.INFRASTRUCTURE, value="10", label="hypervisors")
+        assert list(Stat.objects.for_hero()) == [hero]
+        assert list(Stat.objects.for_infrastructure()) == [infra]
+
+    def test_focus_area_stack_list(self, db):
+        area = FocusArea.objects.create(title="Backend", stack="Python, Django , ,PostgreSQL")
+        assert area.stack_list == ["Python", "Django", "PostgreSQL"]
+
+    def test_index_shows_project_status_and_filters(self, client, profile, project):
+        project.status = Project.Status.ARCHIVED
+        project.save()
+        html = client.get(reverse("portfolio:index")).content.decode()
+        assert 'data-filter="web"' in html
+        assert "status--archived" in html

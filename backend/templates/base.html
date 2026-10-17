@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{% block title %}{{ profile.full_name|default:"Portfolio" }}{% endblock %}</title>
     <meta name="description" content="{% block description %}{{ profile.meta_description }}{% endblock %}">
@@ -17,80 +17,55 @@
         <link rel="alternate" hreflang="{{ code }}" href="{{ request.scheme }}://{{ request.get_host }}{% switch_language_url code %}">
     {% endfor %}
 
-    <!-- Open Graph / Twitter -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{% block og_title %}{{ profile.full_name }}{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}{{ profile.full_name }} — {{ profile.role }}{% endblock %}">
     <meta property="og:description" content="{{ profile.meta_description }}">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
-    {% block og_image %}{% if profile.avatar %}<meta property="og:image" content="{{ profile.avatar.medium.url }}">{% endif %}{% endblock %}
-    <meta name="twitter:card" content="summary_large_image">
+    {% block og_image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% if profile.avatar %}{{ profile.avatar.medium.url }}{% else %}{% static 'img/igor-khaylov.jpg' %}{% endif %}">{% endblock %}
+    <meta name="twitter:card" content="summary">
 
-    <!-- Favicons -->
-    <link href="{% static 'img/favicon.png' %}" rel="icon">
-    <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+    <meta name="color-scheme" content="dark light">
+    <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+    <link rel="icon" href="{% static 'img/favicon.png' %}" sizes="48x48">
+    <link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
-
-    <!-- Vendor CSS -->
-    <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
-    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-    <link href="{% static 'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
-    <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-    <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-
-    <!-- Main CSS -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+    {# Applied before first paint so a saved light/dark choice never flashes the other theme. #}
+    <script>
+        (function () {
+            try {
+                var theme = localStorage.getItem("theme");
+                if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+            } catch (e) {}
+        })();
+    </script>
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
 
     {% block extra_head %}{% endblock %}
-
-    <!-- =======================================================
-    * Design: iPortfolio v3.7.0 by BootstrapMade.com
-    * https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
 </head>
 
 <body>
+{% include "includes/icons.html" %}
 
-<i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+<a class="skip-link" href="#main">{% translate "Skip to content" %}</a>
 
-{% include "includes/sidebar.html" %}
+{% include "includes/header.html" %}
 
 {% if messages %}
-    <div class="container pt-3" id="messages">
+    <div class="container messages">
         {% for message in messages %}
-            <div class="alert alert-{{ message.tags|default:'info' }}" role="alert">{{ message }}</div>
+            <p class="message message--{{ message.tags|default:'info' }}" role="status">{{ message }}</p>
         {% endfor %}
     </div>
 {% endif %}
 
-{% block body %}{% endblock %}
+<main id="main">
+    {% block body %}{% endblock %}
+</main>
 
 {% include "includes/footer.html" %}
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-<!-- Vendor JS -->
-<script src="{% static 'vendor/purecounter/purecounter.js' %}" defer></script>
-<script src="{% static 'vendor/aos/aos.js' %}" defer></script>
-<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}" defer></script>
-<script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}" defer></script>
-<script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}" defer></script>
-<script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}" defer></script>
-<script src="{% static 'vendor/typed.js/typed.min.js' %}" defer></script>
-<script src="{% static 'vendor/waypoints/noframework.waypoints.js' %}" defer></script>
-
-<!-- Main JS -->
-<script src="{% static 'js/main.js' %}" defer></script>
-
+<script src="{% static 'js/site.js' %}" defer></script>
 {% block extra_js %}{% endblock %}
-
 </body>
 
 </html>

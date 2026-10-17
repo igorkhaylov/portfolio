@@ -1,0 +1,11 @@
+<article class="card area">
+    <div class="area__icon" aria-hidden="true"><svg class="icon"><use href="#i-{{ area.icon }}"></use></svg></div>
+    <h3 class="card__title">{{ area.title }}</h3>
+    {% if area.summary %}<p>{{ area.summary }}</p>{% endif %}
+    {% if area.highlight_list %}
+        <ul class="bullets">{% for line in area.highlight_list %}<li>{{ line }}</li>{% endfor %}</ul>
+    {% endif %}
+    {% if area.stack_list %}
+        <ul class="tags tags--small">{% for item in area.stack_list %}<li>{{ item }}</li>{% endfor %}</ul>
+    {% endif %}
+</article>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-02 16:55+0500\n"
+"POT-Creation-Date: 2026-10-17 12:37+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,24 +38,721 @@ msgstr ""
 msgid "Lower appears first; use to control display order."
 msgstr ""
 
-#: config/settings/base.py:225
-msgid "English"
+#: apps/portfolio/admin/profile.py:27 templates/includes/header.html:11
+#: templates/portfolio/index.html:86
+msgid "About"
 msgstr ""
 
-#: config/settings/base.py:226
+#: apps/portfolio/admin/profile.py:28
+msgid "Contacts"
+msgstr ""
+
+#: apps/portfolio/admin/profile.py:29 apps/portfolio/admin/projects.py:57
+msgid "Media"
+msgstr ""
+
+#: apps/portfolio/admin/profile.py:30
+msgid "SEO"
+msgstr ""
+
+#: apps/portfolio/admin/profile.py:31 apps/portfolio/admin/projects.py:60
+msgid "Service"
+msgstr ""
+
+#: apps/portfolio/admin/profile.py:34 apps/portfolio/admin/projects.py:18
+#: apps/portfolio/admin/projects.py:63
+msgid "Preview"
+msgstr ""
+
+#: apps/portfolio/admin/projects.py:29
+msgid "Stack item"
+msgstr ""
+
+#: apps/portfolio/admin/projects.py:30 apps/portfolio/models/projects.py:94
+#: apps/portfolio/models/showcase.py:85 templates/portfolio/index.html:243
+#: templates/portfolio/project_detail.html:52
+msgid "Stack"
+msgstr ""
+
+#: apps/portfolio/admin/projects.py:56 apps/portfolio/admin/resume.py:35
+#: apps/portfolio/admin/resume.py:47 apps/portfolio/admin/resume.py:59
+msgid "Content"
+msgstr ""
+
+#: apps/portfolio/admin/projects.py:58
+#: templates/portfolio/project_detail.html:29
+msgid "Links"
+msgstr ""
+
+#: apps/portfolio/admin/projects.py:59 apps/portfolio/admin/resume.py:36
+#: apps/portfolio/admin/resume.py:48 apps/portfolio/admin/resume.py:60
+#: apps/portfolio/admin/showcase.py:29
+msgid "Display"
+msgstr ""
+
+#: apps/portfolio/admin/resume.py:34 apps/portfolio/admin/resume.py:46
+#: apps/portfolio/admin/resume.py:58 apps/portfolio/models/projects.py:84
+#: templates/portfolio/project_detail.html:26
+msgid "Period"
+msgstr ""
+
+#: apps/portfolio/admin/showcase.py:28
+#: templates/portfolio/includes/project_card.html:25
+msgid "Details"
+msgstr ""
+
+#: apps/portfolio/apps.py:8 templates/portfolio/index.html:4
+msgid "Portfolio"
+msgstr ""
+
+#: apps/portfolio/models/mixins.py:15
+msgid "Highlights"
+msgstr ""
+
+#: apps/portfolio/models/mixins.py:17
+msgid "One bullet point per line. Blank lines are ignored."
+msgstr ""
+
+#: apps/portfolio/models/profile.py:39
+msgid "Full name"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:41
+msgid "Headline"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:44
+msgid ""
+"Rotating job titles in the hero, comma-separated: Backend Developer, Python "
+"Developer"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:47
+msgid "Role"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:50
+msgid ""
+"Short title under the About heading, e.g. Python Developer & Web Developer."
+msgstr ""
+
+#: apps/portfolio/models/profile.py:52 apps/portfolio/models/projects.py:79
+#: apps/portfolio/models/showcase.py:82
+msgid "Summary"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:52
+msgid "Two or three sentences for the About block."
+msgstr ""
+
+#: apps/portfolio/models/profile.py:53
+msgid "Biography"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:53
+msgid "Longer text for the About block."
+msgstr ""
+
+#: apps/portfolio/models/profile.py:55
+msgid "Now"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:57
+msgid "What I am working on right now — one item per line."
+msgstr ""
+
+#: apps/portfolio/models/profile.py:60 apps/portfolio/models/resume.py:49
+msgid "Location"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:61 templates/portfolio/index.html:286
+msgid "Email"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:62 templates/portfolio/index.html:292
+msgid "Phone"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:63
+msgid "Date of birth"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:65
+msgid "Career start year"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:68
+msgid "Used to render years of experience automatically."
+msgstr ""
+
+#: apps/portfolio/models/profile.py:70
+msgid "Open to work"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:72
+msgid "Avatar"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:73
+msgid "Hero background"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:74
+msgid "CV file"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:77
+msgid "Meta description"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:80
+msgid "Used in <meta name=\"description\"> and social previews."
+msgstr ""
+
+#: apps/portfolio/models/profile.py:82
+msgid "Meta keywords"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:85 apps/portfolio/models/profile.py:129
+msgid "Active"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:87
+msgid "The site renders the first active profile."
+msgstr ""
+
+#: apps/portfolio/models/profile.py:93 apps/portfolio/models/profile.py:94
+#: apps/portfolio/models/profile.py:119
+msgid "Profile"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:121 apps/portfolio/models/projects.py:26
+#: apps/portfolio/models/projects.py:69 apps/portfolio/models/resume.py:84
+#: apps/portfolio/models/showcase.py:81 apps/portfolio/models/skills.py:23
+msgid "Title"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:122
+msgid "URL"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:124 apps/portfolio/models/showcase.py:83
+#: apps/portfolio/models/skills.py:52
+msgid "Icon"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:127
+msgid "Icon name from the site sprite: telegram, github, link."
+msgstr ""
+
+#: apps/portfolio/models/profile.py:132
+msgid "Social link"
+msgstr ""
+
+#: apps/portfolio/models/profile.py:133
+msgid "Social links"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:27 apps/portfolio/models/projects.py:70
+msgid "Slug"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:28 apps/portfolio/models/projects.py:100
+#: apps/portfolio/models/resume.py:27 apps/portfolio/models/showcase.py:50
+#: apps/portfolio/models/showcase.py:90 apps/portfolio/models/skills.py:24
+#: apps/portfolio/models/skills.py:62
+msgid "Published"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:33
+msgid "Project category"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:34
+msgid "Project categories"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:63
+msgid "In production"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:64
+msgid "Internal system"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:65
+msgid "In development"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:66
+msgid "Open source"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:67
+msgid "Archive"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:75
+msgid "Category"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:80 apps/portfolio/models/resume.py:50
+#: apps/portfolio/models/resume.py:69 apps/portfolio/models/resume.py:86
+msgid "Description"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:81
+#: templates/portfolio/project_detail.html:25
+msgid "My role"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:82
+#: templates/portfolio/project_detail.html:27
+msgid "Client"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:83
+msgid "Status"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:84
+msgid "Free text: 2022 — now."
+msgstr ""
+
+#: apps/portfolio/models/projects.py:86
+msgid "Cover"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:87
+msgid "Live URL"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:88
+msgid "Repository URL"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:98
+msgid "Release date"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:99 apps/portfolio/models/skills.py:58
+msgid "Featured"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:105 apps/portfolio/models/projects.py:138
+msgid "Project"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:106 templates/includes/header.html:13
+#: templates/portfolio/index.html:155
+msgid "Projects"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:123
+msgid "Project stack item"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:124
+msgid "Project stack"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:140
+msgid "Image"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:141
+msgid "Caption"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:144
+msgid "Project image"
+msgstr ""
+
+#: apps/portfolio/models/projects.py:145
+msgid "Project images"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:19
+msgid "Start date"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:21
+msgid "End date"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:24
+msgid "Leave empty for an ongoing period."
+msgstr ""
+
+#: apps/portfolio/models/resume.py:26
+msgid "Ongoing"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:37
+#, python-format
+msgid "%(start)s — Present"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:37
+msgid "Present"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:47
+msgid "Position"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:48
+msgid "Company"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:51
+msgid "Company URL"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:56 apps/portfolio/models/resume.py:57
+#: templates/includes/header.html:14 templates/portfolio/index.html:188
+msgid "Experience"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:66
+msgid "Institution"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:67
+msgid "Degree"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:68
+msgid "Speciality"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:74 apps/portfolio/models/resume.py:75
+#: templates/portfolio/index.html:210
+msgid "Education"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:85
+msgid "Provider"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:87
+msgid "Certificate or course URL"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:92
+msgid "Course"
+msgstr ""
+
+#: apps/portfolio/models/resume.py:93
+msgid "Courses"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:13
+msgid "Code"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:14
+msgid "Server"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:15
+msgid "Layers"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:16
+msgid "Database"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:17
+msgid "Activity"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:18
+msgid "CPU / GPU"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:19
+msgid "Video"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:20
+msgid "Shield"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:21
+msgid "Globe"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:22
+msgid "Git"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:23
+msgid "Terminal"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:24
+msgid "Package"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:43
+msgid "Hero"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:44 apps/portfolio/models/showcase.py:78
+#: templates/includes/header.html:12 templates/portfolio/index.html:118
+msgid "Infrastructure"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:46 apps/portfolio/models/showcase.py:80
+msgid "Section"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:47
+msgid "Value"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:47
+msgid "Shown large: 10, ~100, 1.4 PB."
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:48
+msgid "Label"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:49
+msgid "Note"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:49
+msgid "Small print under the label."
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:55
+msgid "Stat"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:56
+msgid "Stats"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:77
+msgid "What I do"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:88
+msgid "Technologies shown as tags, comma-separated."
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:95
+msgid "Focus area"
+msgstr ""
+
+#: apps/portfolio/models/showcase.py:96
+msgid "Focus areas"
+msgstr ""
+
+#: apps/portfolio/models/skills.py:27
+msgid "Skill group"
+msgstr ""
+
+#: apps/portfolio/models/skills.py:28
+msgid "Skill groups"
+msgstr ""
+
+#: apps/portfolio/models/skills.py:41
+msgid "Group"
+msgstr ""
+
+#: apps/portfolio/models/skills.py:45
+msgid "Name"
+msgstr ""
+
+#: apps/portfolio/models/skills.py:47
+msgid "Level, %"
+msgstr ""
+
+#: apps/portfolio/models/skills.py:49
+msgid "0-100. Not shown on the site; for your own ordering."
+msgstr ""
+
+#: apps/portfolio/models/skills.py:55
+msgid "Not used by the current design."
+msgstr ""
+
+#: apps/portfolio/models/skills.py:60
+msgid "Highlighted in the stack block."
+msgstr ""
+
+#: apps/portfolio/models/skills.py:67
+msgid "Skill"
+msgstr ""
+
+#: apps/portfolio/models/skills.py:68
+msgid "Skills"
+msgstr ""
+
+#: config/settings/base.py:241
 msgid "Русский"
 msgstr ""
 
-#: config/urls.py:27
+#: config/settings/base.py:242
+msgid "English"
+msgstr ""
+
+#: config/urls.py:41
 #, python-format
 msgid "%(app_name)s site admin"
 msgstr ""
 
-#: config/urls.py:28
+#: config/urls.py:42
 #, python-format
 msgid "%(app_name)s administration"
 msgstr ""
 
-#: config/urls.py:29
+#: config/urls.py:43
 msgid "Site administration"
+msgstr ""
+
+#: templates/404.html:10
+msgid "This page does not exist."
+msgstr ""
+
+#: templates/404.html:11
+msgid "Back to home"
+msgstr ""
+
+#: templates/base.html:49
+msgid "Skip to content"
+msgstr ""
+
+#: templates/includes/footer.html:6
+#, python-format
+msgid ""
+"Built on my own <a href=\"%(template_url)s\">django-template</a>, served "
+"from a server I run myself."
+msgstr ""
+
+#: templates/includes/header.html:10
+msgid "Main navigation"
+msgstr ""
+
+#: templates/includes/header.html:15 templates/portfolio/index.html:269
+msgid "Contact"
+msgstr ""
+
+#: templates/includes/header.html:19
+msgid "Language"
+msgstr ""
+
+#: templates/includes/header.html:27
+msgid "Switch theme"
+msgstr ""
+
+#: templates/includes/header.html:32
+msgid "Menu"
+msgstr ""
+
+#: templates/portfolio/index.html:33
+msgid "Open to offers"
+msgstr ""
+
+#: templates/portfolio/index.html:37
+msgid "Specialisation"
+msgstr ""
+
+#: templates/portfolio/index.html:49
+#, python-format
+msgid "Message me on %(name)s"
+msgstr ""
+
+#: templates/portfolio/index.html:53
+msgid "See projects"
+msgstr ""
+
+#: templates/portfolio/index.html:57
+msgid "CV"
+msgstr ""
+
+#: templates/portfolio/index.html:87
+msgid "Backend code and the production it runs on"
+msgstr ""
+
+#: templates/portfolio/index.html:95
+msgid "Right now"
+msgstr ""
+
+#: templates/portfolio/index.html:119
+msgid "The servers are my responsibility too"
+msgstr ""
+
+#: templates/portfolio/index.html:121
+msgid ""
+"Every server of the company is in my area: I build, maintain and monitor the "
+"hardware, the virtualisation, the network, storage and delivery that all of "
+"our products run on."
+msgstr ""
+
+#: templates/portfolio/index.html:156
+msgid "What I have built and keep running"
+msgstr ""
+
+#: templates/portfolio/index.html:158
+#, python-format
+msgid ""
+"%(counter)s project: products in production, internal systems, open source."
+msgid_plural ""
+"%(counter)s projects: products in production, internal systems, open source."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/portfolio/index.html:167
+msgid "Filter projects"
+msgstr ""
+
+#: templates/portfolio/index.html:168
+msgid "All"
+msgstr ""
+
+#: templates/portfolio/index.html:189
+msgid "Experience and education"
+msgstr ""
+
+#: templates/portfolio/index.html:223
+msgid "Self-education"
+msgstr ""
+
+#: templates/portfolio/index.html:244
+msgid "Technologies I work with every day"
+msgstr ""
+
+#: templates/portfolio/index.html:270
+msgid "Let's talk"
+msgstr ""
+
+#: templates/portfolio/index.html:271
+msgid ""
+"A backend that has to hold the load, infrastructure to build or put in "
+"order, a project to bring to production — write to me. Telegram is the "
+"fastest way."
+msgstr ""
+
+#: templates/portfolio/project_detail.html:13
+msgid "All projects"
+msgstr ""
+
+#: templates/portfolio/project_detail.html:31
+msgid "Source code"
+msgstr ""
+
+#: templates/portfolio/project_detail.html:47
+msgid "What I did"
+msgstr ""
+
+#: templates/portfolio/project_detail.html:57
+msgid "Screenshots"
+msgstr ""
+
+#: templates/portfolio/project_detail.html:76
+msgid "More in this category"
 msgstr ""

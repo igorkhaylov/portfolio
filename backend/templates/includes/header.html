@@ -1,0 +1,38 @@
+{% load i18n portfolio_tags %}
+{% url 'portfolio:index' as home_url %}
+<header class="site-header" id="top">
+    <div class="container site-header__inner">
+        <a class="brand" href="{{ home_url }}" aria-label="{{ profile.full_name }}">
+            <span class="brand__mark" aria-hidden="true">IK</span>
+            <span class="brand__name">{{ profile.full_name }}</span>
+        </a>
+
+        <nav class="site-nav" id="site-nav" aria-label="{% translate 'Main navigation' %}">
+            <a href="{{ home_url }}#about">{% translate "About" %}</a>
+            <a href="{{ home_url }}#infrastructure">{% translate "Infrastructure" %}</a>
+            <a href="{{ home_url }}#projects">{% translate "Projects" %}</a>
+            <a href="{{ home_url }}#experience">{% translate "Experience" %}</a>
+            <a href="{{ home_url }}#contact">{% translate "Contact" %}</a>
+        </nav>
+
+        <div class="site-header__tools">
+            <div class="lang-switch" role="group" aria-label="{% translate 'Language' %}">
+                {% get_current_language as CURRENT_LANGUAGE %}
+                {% get_available_languages as LANGUAGES %}
+                {% for code, name in LANGUAGES %}
+                    <a href="{% switch_language_url code %}" hreflang="{{ code }}" lang="{{ code }}"
+                       {% if code == CURRENT_LANGUAGE %}aria-current="true"{% endif %}>{{ code|upper }}</a>
+                {% endfor %}
+            </div>
+            <button class="icon-button" type="button" data-theme-toggle aria-label="{% translate 'Switch theme' %}">
+                <svg class="icon icon--sun"><use href="#i-sun"></use></svg>
+                <svg class="icon icon--moon"><use href="#i-moon"></use></svg>
+            </button>
+            <button class="icon-button nav-toggle" type="button" data-nav-toggle aria-controls="site-nav"
+                    aria-expanded="false" aria-label="{% translate 'Menu' %}">
+                <svg class="icon icon--menu"><use href="#i-menu"></use></svg>
+                <svg class="icon icon--close"><use href="#i-close"></use></svg>
+            </button>
+        </div>
+    </div>
+</header>

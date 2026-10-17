@@ -1,6 +1,5 @@
 __all__ = ("Profile", "SocialLink")
 
-from django.core.cache import cache
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -8,9 +7,6 @@ from django.utils.translation import gettext_lazy as _
 from stdimage.models import StdImageField
 
 from common.models import BaseModel, TimestampMixin
-
-PROFILE_CACHE_KEY = "portfolio:current_profile_id"
-PROFILE_CACHE_TIMEOUT = 60 * 60
 
 
 class ProfileQuerySet(models.QuerySet):
@@ -30,19 +26,11 @@ class ProfileManager(models.Manager.from_queryset(ProfileQuerySet)):
     def current(self) -> "Profile | None":
         """The single active profile the whole site renders from.
 
-        Every page needs it, so the resolved id is cached; the row itself is fetched
-        fresh (its social links are prefetched) to keep edits visible immediately.
+        Not cached: the cache is per gunicorn worker (no Redis in the stack), so a cached
+        value would keep serving stale data from the workers that did not save the edit.
+        It is one indexed query per page.
         """
-        profile_id = cache.get(PROFILE_CACHE_KEY)
-        if profile_id is not None:
-            profile = self.with_social_links().filter(pk=profile_id, is_active=True).first()
-            if profile is not None:
-                return profile
-
-        profile = self.active().with_social_links().first()
-        if profile is not None:
-            cache.set(PROFILE_CACHE_KEY, profile.pk, PROFILE_CACHE_TIMEOUT)
-        return profile
+        return self.active().with_social_links().first()
 
 
 class Profile(TimestampMixin):
@@ -62,7 +50,12 @@ class Profile(TimestampMixin):
         help_text=_("Short title under the About heading, e.g. Python Developer & Web Developer."),
     )
     summary = models.TextField(_("Summary"), blank=True, help_text=_("Two or three sentences for the About block."))
-    bio = models.TextField(_("Biography"), blank=True, help_text=_("Longer text for the resume block."))
+    bio = models.TextField(_("Biography"), blank=True, help_text=_("Longer text for the About block."))
+    now = models.TextField(
+        _("Now"),
+        blank=True,
+        help_text=_("What I am working on right now — one item per line."),
+    )
 
     location = models.CharField(_("Location"), max_length=150, blank=True)
     email = models.EmailField(_("Email"), blank=True)
@@ -104,13 +97,9 @@ class Profile(TimestampMixin):
     def __str__(self) -> str:
         return self.full_name
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        cache.delete(PROFILE_CACHE_KEY)
-
     @property
     def headline_items(self) -> list[str]:
-        """Headline split for the typed.js rotation in the hero."""
+        """Headline split into the role tags shown above the name in the hero."""
         return [item.strip() for item in self.headline.split(",") if item.strip()]
 
     @property
@@ -121,7 +110,7 @@ class Profile(TimestampMixin):
 
 
 class SocialLink(BaseModel):
-    """A link in the sidebar (Telegram, GitHub, ...). Icon is a boxicons class name."""
+    """A contact link (Telegram, GitHub, ...). Icon is a name from the site's SVG sprite."""
 
     profile = models.ForeignKey(
         Profile,
@@ -134,8 +123,8 @@ class SocialLink(BaseModel):
     icon = models.CharField(
         _("Icon"),
         max_length=50,
-        default="bx bxl-link",
-        help_text=_("Boxicons class, e.g. bxl-telegram, bxl-github, bxl-linkedin."),
+        default="link",
+        help_text=_("Icon name from the site sprite: telegram, github, link."),
     )
     is_active = models.BooleanField(_("Active"), default=True)
 
@@ -145,9 +134,3 @@ class SocialLink(BaseModel):
 
     def __str__(self) -> str:
         return self.title
-
-    @property
-    def icon_class(self) -> str:
-        """Boxicons needs the `bx` base class; accept both `bxl-github` and the full form."""
-        icon = self.icon.strip()
-        return icon if icon.startswith("bx ") else f"bx {icon}"

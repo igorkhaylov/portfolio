@@ -77,6 +77,8 @@ ignore = ["RUF012", "RUF001", "RUF002", "RUF003"]
 # kept even though the ignores above already cover those files.
 "**/__init__.py" = ["F401", "F403", "F405", "RUF100"]
 "**/config/settings/*" = ["F401", "F403", "F405"]
+# Site content: long Russian/English sentences read better unwrapped than split mid-phrase.
+"**/management/commands/seed_portfolio.py" = ["E501"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["config", "users", "common", "portfolio"]
