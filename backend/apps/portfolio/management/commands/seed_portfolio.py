@@ -89,8 +89,8 @@ PROFILE = {
     "now_ru": lines(
         "Запускаю билетную систему Центра исламской цивилизации: сайт, киоски, касса, турникеты и AI-ассистент",
         "Перевожу команду на фулстек: делаю project-template — Django и React в одном проекте, готовом к Kubernetes",
-        "Разрабатываю систему управления роботами UBTECH Cruzr: свой сервер вместо облака вендора, веб-консоль "
-        "и приложение на экране робота",
+        "Веду разработку системы управления 12 роботами UBTECH Cruzr: свой сервер вместо облака вендора, "
+        "веб-консоль и приложение на экране робота",
         "Развиваю платформу мониторинга на ~85 серверов и ~190 сервисов",
         "Сопровождаю GPU-серверы с LLM: 8× NVIDIA B200 и 8× RTX PRO 6000",
         "Переписываю backend Ilmi и SPlay на своём django-template",
@@ -101,7 +101,7 @@ PROFILE = {
         "turnstiles and an AI assistant",
         "Moving the team to full-stack: building project-template — Django and React in one project, ready for "
         "Kubernetes",
-        "Building the fleet system for UBTECH Cruzr robots: our own server instead of the vendor cloud, a web "
+        "Leading the fleet system for 12 UBTECH Cruzr robots: our own server instead of the vendor cloud, a web "
         "console and an app on the robot's screen",
         "Growing the monitoring platform that covers ~85 servers and ~190 services",
         "Running the GPU servers with LLMs: 8× NVIDIA B200 and 8× RTX PRO 6000",
@@ -605,7 +605,7 @@ EXPERIENCE = [
             "Ввёл в эксплуатацию GPU-серверы для LLM: 8× NVIDIA B200 и 8× RTX PRO 6000",
             "Написал django-template — обязательную основу новых backend-проектов (~30 проектов)",
             "Перевожу команду на фулстек: project-template с Django, React и готовностью к Kubernetes",
-            "Разрабатываю систему управления роботами UBTECH Cruzr: сервер, веб-консоль и Android-приложение",
+            "Ведущий разработчик системы управления 12 роботами UBTECH Cruzr: сервер, веб-консоль и Android-приложение",
             "Настроил CI/CD: сборка образов в GitHub Actions и GitLab CI, деплой по SSH, self-hosted раннеры",
             "Пишу runbook-и и разборы инцидентов с причинами",
         ),
@@ -618,7 +618,7 @@ EXPERIENCE = [
             "Brought GPU servers for LLMs into production: 8× NVIDIA B200 and 8× RTX PRO 6000",
             "Wrote django-template — the mandatory base of new backend projects (~30 so far)",
             "Moving the team to full-stack: project-template with Django, React and Kubernetes readiness",
-            "Building the fleet system for UBTECH Cruzr robots: server, web console and Android app",
+            "Lead developer of the fleet system for 12 UBTECH Cruzr robots: server, web console and Android app",
             "Set up CI/CD: images built in GitHub Actions and GitLab CI, SSH deploys, self-hosted runners",
             "Write runbooks and incident post-mortems with root causes",
         ),
@@ -1067,20 +1067,21 @@ PROJECTS = [
         "is_featured": True,
         "title_ru": "Cruzr Fleet — управление роботами-гидами",
         "title_en": "Cruzr Fleet — managing guide robots",
-        "summary_ru": "Свой сервер, веб-консоль и приложение на экране для гуманоидных роботов UBTECH Cruzr 1S",
-        "summary_en": "Our own server, web console and on-screen app for UBTECH Cruzr 1S humanoid robots",
+        "summary_ru": "Свой сервер, веб-консоль и приложение на экране для парка из 12 гуманоидных роботов UBTECH "
+        "Cruzr 1S",
+        "summary_en": "Our own server, web console and on-screen app for a fleet of 12 UBTECH Cruzr 1S humanoid robots",
         "description_ru": (
-            "Для Центра исламской цивилизации команда делает роботов-гидов на базе UBTECH Cruzr 1S. Из коробки "
-            "робот завязан на облако производителя, поэтому мы постепенно переводим его на собственную систему "
-            "управления и свои серверы.\n\n"
+            "Центр исламской цивилизации купил 12 гуманоидных роботов UBTECH Cruzr 1S, и наша команда делает из "
+            "них роботов-гидов. Из коробки робот завязан на облако производителя, поэтому мы постепенно "
+            "переводим весь парк на собственную систему управления и свои серверы.\n\n"
             "Я начал с нуля: изучил SDK, прошивки и ROS-слой робота, разобрал форматы движений и карт, а затем "
             "написал три части системы — сервер управления парком на Django, веб-консоль для операторов и "
             "приложение на экране робота. Их связывает собственный WebSocket-протокол."
         ),
         "description_en": (
-            "For the Centre of Islamic Civilization, our team is building guide robots on UBTECH Cruzr 1S. Out of "
-            "the box the robot depends on the vendor's cloud, so we are gradually moving it to our own fleet "
-            "system and our own servers.\n\n"
+            "The Centre of Islamic Civilization bought 12 UBTECH Cruzr 1S humanoid robots, and our team is "
+            "turning them into guide robots. Out of the box the robot depends on the vendor's cloud, so we are "
+            "gradually moving the whole fleet to our own management system and our own servers.\n\n"
             "I started from scratch: studied the robot's SDK, firmware and ROS layer, reverse-engineered the "
             "motion and map formats, and then wrote the three parts of the system — a Django fleet server, a "
             "web console for operators and the app on the robot's screen. They talk over our own WebSocket "
