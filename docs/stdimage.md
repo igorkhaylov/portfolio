@@ -57,7 +57,7 @@ python manage.py rendervariations 'users.User.picture'
 ## Deleting files on model delete
 
 `django-cleanup` is installed, so when a model instance (or its image field) is deleted or
-replaced, the underlying file in S3/MinIO is removed automatically — no manual cleanup
+replaced, the underlying file in storage is removed automatically — no manual cleanup
 needed.
 
 ## Maintaining the fork
