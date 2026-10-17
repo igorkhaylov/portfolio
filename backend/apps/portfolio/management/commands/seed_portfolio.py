@@ -67,7 +67,9 @@ PROFILE = {
         "Мне важно, чтобы система работала без меня: понятная архитектура, тесты, деплой одной "
         "командой и откат по тегу, мониторинг с алертами, записанные runbook-и и разборы "
         "инцидентов. Для этого я написал собственный django-template — сейчас на нём строятся "
-        "все новые backend-проекты компании.\n\n"
+        "все новые backend-проекты компании. Теперь команда переходит на фулстек, и для этого я "
+        "делаю project-template: backend и frontend в одном проекте, который сразу готов к "
+        "выкатке в кластер Kubernetes.\n\n"
         "Родом из Самарканда, живу в Ташкенте. Русский — родной, английский — средний."
     ),
     "bio_en": (
@@ -79,11 +81,16 @@ PROFILE = {
         "I care about systems that run without me: a clear architecture, tests, one-command "
         "deploys with rollback by tag, monitoring with alerts, written runbooks and incident "
         "post-mortems. That is why I wrote my own django-template — every new backend project "
-        "of the company is now built on it.\n\n"
+        "of the company is now built on it. Now the team is moving to full-stack development, and "
+        "for that I am building project-template: backend and frontend in one project that is "
+        "ready to ship to a Kubernetes cluster from day one.\n\n"
         "Born in Samarkand, living in Tashkent. Russian is my native language, English intermediate."
     ),
     "now_ru": lines(
         "Запускаю билетную систему Центра исламской цивилизации: сайт, киоски, касса, турникеты и AI-ассистент",
+        "Перевожу команду на фулстек: делаю project-template — Django и React в одном проекте, готовом к Kubernetes",
+        "Разрабатываю систему управления роботами UBTECH Cruzr: свой сервер вместо облака вендора, веб-консоль "
+        "и приложение на экране робота",
         "Развиваю платформу мониторинга на ~85 серверов и ~190 сервисов",
         "Сопровождаю GPU-серверы с LLM: 8× NVIDIA B200 и 8× RTX PRO 6000",
         "Переписываю backend Ilmi и SPlay на своём django-template",
@@ -92,6 +99,10 @@ PROFILE = {
     "now_en": lines(
         "Launching the ticketing system of the Centre of Islamic Civilization: website, kiosks, cashier, "
         "turnstiles and an AI assistant",
+        "Moving the team to full-stack: building project-template — Django and React in one project, ready for "
+        "Kubernetes",
+        "Building the fleet system for UBTECH Cruzr robots: our own server instead of the vendor cloud, a web "
+        "console and an app on the robot's screen",
         "Growing the monitoring platform that covers ~85 servers and ~190 services",
         "Running the GPU servers with LLMs: 8× NVIDIA B200 and 8× RTX PRO 6000",
         "Rewriting the Ilmi and SPlay backends on my django-template",
@@ -375,16 +386,16 @@ FOCUS_AREAS = [
         "summary_en": "The templates and rules the team writes and ships code by.",
         "highlights_ru": lines(
             "django-template — основа ~30 проектов компании",
-            "Единый стиль кода, коммитов и документации",
-            "Аудиты безопасности и QA с помощью AI-агентов",
+            "project-template — фулстек Django + React, готовый к Kubernetes",
+            "Единый стиль кода, коммитов и документации, QA с AI-агентами",
         ),
         "highlights_en": lines(
             "django-template — the base of ~30 company projects",
-            "One style for code, commits and documentation",
-            "Security audits and QA with AI agents",
+            "project-template — full-stack Django + React, ready for Kubernetes",
+            "One style for code, commits and docs, QA with AI agents",
         ),
-        "stack_ru": "Ruff, pytest, pre-commit, GitHub Actions",
-        "stack_en": "Ruff, pytest, pre-commit, GitHub Actions",
+        "stack_ru": "Ruff, pytest, pre-commit, GitHub Actions, OpenAPI",
+        "stack_en": "Ruff, pytest, pre-commit, GitHub Actions, OpenAPI",
     },
     {
         "section": INFRA_AREA,
@@ -593,6 +604,8 @@ EXPERIENCE = [
             "Построил платформу мониторинга и стандарт /deep-health/ для всех проектов",
             "Ввёл в эксплуатацию GPU-серверы для LLM: 8× NVIDIA B200 и 8× RTX PRO 6000",
             "Написал django-template — обязательную основу новых backend-проектов (~30 проектов)",
+            "Перевожу команду на фулстек: project-template с Django, React и готовностью к Kubernetes",
+            "Разрабатываю систему управления роботами UBTECH Cruzr: сервер, веб-консоль и Android-приложение",
             "Настроил CI/CD: сборка образов в GitHub Actions и GitLab CI, деплой по SSH, self-hosted раннеры",
             "Пишу runbook-и и разборы инцидентов с причинами",
         ),
@@ -604,6 +617,8 @@ EXPERIENCE = [
             "Built the monitoring platform and the /deep-health/ standard for every project",
             "Brought GPU servers for LLMs into production: 8× NVIDIA B200 and 8× RTX PRO 6000",
             "Wrote django-template — the mandatory base of new backend projects (~30 so far)",
+            "Moving the team to full-stack: project-template with Django, React and Kubernetes readiness",
+            "Building the fleet system for UBTECH Cruzr robots: server, web console and Android app",
             "Set up CI/CD: images built in GitHub Actions and GitLab CI, SSH deploys, self-hosted runners",
             "Write runbooks and incident post-mortems with root causes",
         ),
@@ -771,6 +786,7 @@ SKILL_GROUPS = [
             ("ClickHouse", "ClickHouse", False),
             ("Elasticsearch", "Elasticsearch", False),
             ("pytest", "pytest", False),
+            ("OpenAPI", "OpenAPI", False),
             ("Платёжные шлюзы", "Payment gateways", False),
             ("Telegram-боты (aiogram)", "Telegram bots (aiogram)", False),
         ],
@@ -784,6 +800,7 @@ SKILL_GROUPS = [
             ("Docker", "Docker", True),
             ("Proxmox VE", "Proxmox VE", True),
             ("KVM", "KVM", False),
+            ("Kubernetes", "Kubernetes", False),
             ("Nginx", "Nginx", False),
             ("MinIO / S3", "MinIO / S3", True),
             ("ZFS / RAID", "ZFS / RAID", False),
@@ -856,8 +873,21 @@ SKILL_GROUPS = [
             ("JavaScript", "JavaScript", False),
             ("TypeScript", "TypeScript", False),
             ("React", "React", False),
+            ("Vite", "Vite", False),
+            ("Tailwind CSS", "Tailwind CSS", False),
+            ("Playwright", "Playwright", False),
             ("HTMX", "HTMX", False),
             ("Alpine.js", "Alpine.js", False),
+        ],
+    },
+    {
+        "rank": 80,
+        "title_ru": "Android и робототехника",
+        "title_en": "Android & robotics",
+        "skills": [
+            ("Kotlin", "Kotlin", False),
+            ("Android SDK", "Android SDK", False),
+            ("ROS", "ROS", False),
         ],
     },
 ]
@@ -870,6 +900,7 @@ PROJECT_CATEGORIES = [
     {"rank": 10, "slug": "media", "title_ru": "Медиа и стриминг", "title_en": "Media & streaming"},
     {"rank": 20, "slug": "education", "title_ru": "Образование и сервисы", "title_en": "Education & services"},
     {"rank": 30, "slug": "culture", "title_ru": "Музеи и госсектор", "title_en": "Museums & public sector"},
+    {"rank": 35, "slug": "robotics", "title_ru": "Робототехника", "title_en": "Robotics"},
     {"rank": 40, "slug": "enterprise", "title_ru": "Корпоративные системы", "title_en": "Enterprise systems"},
     {"rank": 50, "slug": "infrastructure", "title_ru": "Инфраструктура", "title_en": "Infrastructure"},
     {"rank": 60, "slug": "personal", "title_ru": "Свои проекты", "title_en": "Own projects"},
@@ -1026,6 +1057,83 @@ PROJECTS = [
             "LLM-шлюз",
             "pytest",
             "Docker",
+        ],
+    },
+    {
+        "rank": 25,
+        "slug": "cruzr",
+        "category": "robotics",
+        "status": DEVELOPMENT,
+        "is_featured": True,
+        "title_ru": "Cruzr Fleet — управление роботами-гидами",
+        "title_en": "Cruzr Fleet — managing guide robots",
+        "summary_ru": "Свой сервер, веб-консоль и приложение на экране для гуманоидных роботов UBTECH Cruzr 1S",
+        "summary_en": "Our own server, web console and on-screen app for UBTECH Cruzr 1S humanoid robots",
+        "description_ru": (
+            "Для Центра исламской цивилизации команда делает роботов-гидов на базе UBTECH Cruzr 1S. Из коробки "
+            "робот завязан на облако производителя, поэтому мы постепенно переводим его на собственную систему "
+            "управления и свои серверы.\n\n"
+            "Я начал с нуля: изучил SDK, прошивки и ROS-слой робота, разобрал форматы движений и карт, а затем "
+            "написал три части системы — сервер управления парком на Django, веб-консоль для операторов и "
+            "приложение на экране робота. Их связывает собственный WebSocket-протокол."
+        ),
+        "description_en": (
+            "For the Centre of Islamic Civilization, our team is building guide robots on UBTECH Cruzr 1S. Out of "
+            "the box the robot depends on the vendor's cloud, so we are gradually moving it to our own fleet "
+            "system and our own servers.\n\n"
+            "I started from scratch: studied the robot's SDK, firmware and ROS layer, reverse-engineered the "
+            "motion and map formats, and then wrote the three parts of the system — a Django fleet server, a "
+            "web console for operators and the app on the robot's screen. They talk over our own WebSocket "
+            "protocol."
+        ),
+        "role_ru": "Ведущий разработчик: сервер, консоль, Android",
+        "role_en": "Lead developer: server, console, Android",
+        "client_ru": CIC_RU,
+        "client_en": CIC_EN,
+        "period_ru": "2026 — н.в.",
+        "period_en": "2026 — now",
+        "highlights_ru": lines(
+            "Сервер управления парком вместо облака UBTECH: привязка роботов по ключам, WebSocket-протокол, роли "
+            "и площадки, журнал действий",
+            "Управление из браузера: езда с клавиатуры, радар препятствий по лидару и ультразвуку, видео и звук "
+            "с робота через LiveKit",
+            "Редактор карт: точки, стены, зоны, правка сетки, несколько зарядных станций, версии и отправка "
+            "карт на роботы",
+            "Приложение на экране робота (Kotlin, Android 5.1): PIN, движения, ручная езда, сканирование карт "
+            "с живым превью, заезд на зарядку",
+            "Разобрал робота с нуля: Android SDK, ROS Melodic, прошивки, форматы файлов движений и карт USLAM",
+            "Каталог 136 движений, проверенных на роботе, с разметкой для LLM-агента",
+            "Имитатор робота и сквозные тесты консоли на Playwright",
+        ),
+        "highlights_en": lines(
+            "A fleet server instead of the UBTECH cloud: robot pairing with device keys, a WebSocket protocol, "
+            "roles and sites, an audit log",
+            "Control from the browser: keyboard driving, an obstacle radar from the lidar and ultrasonic "
+            "sensors, video and audio from the robot over LiveKit",
+            "Map editor: points, walls, zones, grid edits, several charging stations, versions and deployment "
+            "to the robots",
+            "The app on the robot's screen (Kotlin, Android 5.1): PIN, motions, manual driving, map scanning "
+            "with a live preview, docking",
+            "Took the robot apart from scratch: Android SDK, ROS Melodic, firmware, the motion and USLAM map "
+            "file formats",
+            "A catalogue of 136 motions verified on the robot, annotated for an LLM agent",
+            "A fake robot and end-to-end console tests in Playwright",
+        ),
+        "skills": [
+            "Python",
+            "Django",
+            "Django Channels",
+            "PostgreSQL",
+            "Docker",
+            "MinIO / S3",
+            "LiveKit",
+            "WebRTC",
+            "TypeScript",
+            "React",
+            "Playwright",
+            "Kotlin",
+            "Android SDK",
+            "ROS",
         ],
     },
     {
@@ -1494,6 +1602,75 @@ PROJECTS = [
         ],
     },
     {
+        "rank": 115,
+        "slug": "project-template",
+        "category": "open-source",
+        "status": OPEN_SOURCE,
+        "is_featured": True,
+        "title_ru": "project-template — фулстек-шаблон",
+        "title_en": "project-template — full-stack starter",
+        "summary_ru": "Django и React в одном монорепо: общий OpenAPI-контракт, независимые пайплайны и образы, "
+        "готовые к Kubernetes",
+        "summary_en": "Django and React in one monorepo: a shared OpenAPI contract, independent pipelines and images "
+        "ready for Kubernetes",
+        "description_ru": (
+            "Команда переходит на фулстек: один проект теперь включает и backend, и frontend и с первого дня "
+            "готов к выкатке в кластер Kubernetes. project-template — основа для таких проектов. Он вырос из "
+            "django-template: Django 5.2 + DRF на backend, React 19 + TypeScript + Vite на frontend и ops-слой "
+            "с Docker Compose, nginx и CI.\n\n"
+            "Backend и frontend самодостаточны: у каждого свой Dockerfile, свои инструменты, свой CI и свой "
+            "образ, а договариваются они через OpenAPI-контракт, из которого генерируется типизированный "
+            "клиент. Образы не зависят от окружения, поэтому один и тот же образ идёт и в Compose на сервере, "
+            "и в Kubernetes."
+        ),
+        "description_en": (
+            "The team is moving to full-stack development: one project now covers both the backend and the "
+            "frontend and is ready to ship to a Kubernetes cluster from day one. project-template is the base "
+            "for such projects. It grew out of django-template: Django 5.2 + DRF on the backend, React 19 + "
+            "TypeScript + Vite on the frontend and an ops layer with Docker Compose, nginx and CI.\n\n"
+            "The backend and the frontend are self-contained: each has its own Dockerfile, tooling, CI and "
+            "image, and they agree through an OpenAPI contract that a typed client is generated from. The "
+            "images do not depend on the environment, so the same image goes to Compose on a server and to "
+            "Kubernetes."
+        ),
+        "role_ru": "Автор",
+        "role_en": "Author",
+        "period_ru": "2026 — н.в.",
+        "period_en": "2026 — now",
+        "highlights_ru": lines(
+            "OpenAPI-контракт между командами: backend генерирует схему, frontend — типы, CI падает, если "
+            "контракт устарел",
+            "Готовность к Kubernetes: настройки только из env, миграции отдельным release-шагом (Job в "
+            "кластере), liveness и readiness, non-root, JSON-логи",
+            "Независимые пайплайны и деплой одного компонента, не трогая второй",
+            "Новый проект одной командой: скрипт переименовывает всё и выдаёт проекту свой порт",
+            "SPA и API на одном домене: без CORS, cookie и CSRF работают из коробки",
+            "CODEOWNERS для двух команд, Dependabot, pre-commit для Python и TypeScript",
+        ),
+        "highlights_en": lines(
+            "An OpenAPI contract between the teams: the backend generates the schema, the frontend the types, "
+            "CI fails when the contract is stale",
+            "Kubernetes-ready: env-only settings, migrations in a separate release step (a Job in the "
+            "cluster), liveness and readiness probes, non-root, JSON logs",
+            "Independent pipelines and deploying one component without touching the other",
+            "A new project in one command: a script renames everything and gives the project its own port",
+            "SPA and API on one domain: no CORS, cookies and CSRF work out of the box",
+            "CODEOWNERS for two teams, Dependabot, pre-commit for Python and TypeScript",
+        ),
+        "repository_url": "https://github.com/igorkhaylov/project-template",
+        "skills": [
+            "Django",
+            "Django REST Framework",
+            "OpenAPI",
+            "Docker",
+            "Kubernetes",
+            "TypeScript",
+            "React",
+            "Vite",
+            "Tailwind CSS",
+        ],
+    },
+    {
         "rank": 120,
         "slug": "iccu-digital",
         "category": "culture",
@@ -1912,31 +2089,29 @@ PROJECTS = [
     },
     {
         "rank": 230,
-        "slug": "react-and-project-templates",
+        "slug": "react-template",
         "category": "open-source",
         "status": OPEN_SOURCE,
-        "title_ru": "react-template и project-template",
-        "title_en": "react-template and project-template",
-        "summary_ru": "Фронтенд-шаблон на React 19 и монорепо «backend + SPA + ops» с общим OpenAPI-контрактом",
-        "summary_en": "A React 19 frontend starter and a backend + SPA + ops monorepo with a shared OpenAPI contract",
+        "title_ru": "react-template",
+        "title_en": "react-template",
+        "summary_ru": "Фронтенд-шаблон на React 19 и TypeScript в пару к django-template",
+        "summary_en": "A React 19 and TypeScript frontend starter to pair with django-template",
         "description_ru": (
             "react-template — стартовый фронтенд к django-template: React 19, TypeScript, Vite, TanStack "
             "Router и Query, Tailwind 4, i18n на трёх языках, Vitest и Docker-образ с конфигурацией в "
-            "рантайме. project-template собирает backend, SPA и ops-слой в один монорепозиторий с общим "
-            "OpenAPI-контрактом и готовностью к Kubernetes."
+            "рантайме. Его подход к фронтенду лёг в основу project-template."
         ),
         "description_en": (
             "react-template is the frontend starter for django-template: React 19, TypeScript, Vite, TanStack "
             "Router and Query, Tailwind 4, i18n in three languages, Vitest and a Docker image configured at "
-            "runtime. project-template puts the backend, the SPA and the ops layer into one monorepo with a "
-            "shared OpenAPI contract, ready for Kubernetes."
+            "runtime. Its approach to the frontend became the base of project-template."
         ),
         "role_ru": "Автор",
         "role_en": "Author",
         "period_ru": "2026",
         "period_en": "2026",
-        "repository_url": "https://github.com/igorkhaylov/project-template",
-        "skills": ["React", "TypeScript", "Docker", "GitHub Actions"],
+        "repository_url": "https://github.com/igorkhaylov/react-template",
+        "skills": ["TypeScript", "React", "Vite", "Tailwind CSS", "Docker", "GitHub Actions"],
     },
     {
         "rank": 240,
@@ -1965,6 +2140,9 @@ PROJECTS = [
         "skills": ["Python", "Django"],
     },
 ]
+
+# Projects that earlier runs of this command created under slugs that are gone from PROJECTS.
+RETIRED_PROJECT_SLUGS = ("react-and-project-templates",)
 
 
 class Command(BaseCommand):
@@ -2049,6 +2227,7 @@ class Command(BaseCommand):
             defaults["category"] = categories[data["category"]]
             project, _ = Project.objects.update_or_create(slug=data["slug"], defaults=defaults)
             project.skills.set(Skill.objects.filter(name_ru__in=data["skills"]))
+        Project.objects.filter(slug__in=RETIRED_PROJECT_SLUGS).delete()
         self.stdout.write(f"Projects: {len(PROJECTS)}")
 
         self.stdout.write(self.style.SUCCESS("Done. Covers and gallery images are added through the admin."))

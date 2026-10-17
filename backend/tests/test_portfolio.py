@@ -115,6 +115,12 @@ class TestSeedCommand:
         assert (Profile.objects.count(), Experience.objects.count(), Skill.objects.count()) == first
         assert Profile.objects.current() is not None
 
+    def test_seed_removes_retired_projects(self, db):
+        Project.objects.create(title="Old card", slug="react-and-project-templates")
+        call_command("seed_portfolio", verbosity=0)
+        assert not Project.objects.filter(slug="react-and-project-templates").exists()
+        assert Project.objects.filter(slug__in=("react-template", "project-template")).count() == 2
+
     def test_seed_fills_every_section(self, db):
         call_command("seed_portfolio", verbosity=0)
         assert Stat.objects.for_hero().exists()
