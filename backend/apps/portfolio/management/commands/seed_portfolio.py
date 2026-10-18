@@ -92,6 +92,8 @@ PROFILE = {
         "Веду разработку системы управления 12 роботами UBTECH Cruzr: свой сервер вместо облака вендора, "
         "веб-консоль и приложение на экране робота",
         "Развиваю платформу мониторинга на ~85 серверов и ~190 сервисов",
+        "Строю свой почтовый сервер mailnest: Postfix, Dovecot, Rspamd и Roundcube на своих Dockerfile, "
+        "управление на Django",
         "Сопровождаю GPU-серверы с LLM: 8× NVIDIA B200 и 8× RTX PRO 6000",
         "Переписываю backend Ilmi и SPlay на своём django-template",
         "Проектирую отказоустойчивую платформу на две площадки: Kubernetes, Patroni, репликация S3",
@@ -104,6 +106,8 @@ PROFILE = {
         "Leading the fleet system for 12 UBTECH Cruzr robots: our own server instead of the vendor cloud, a web "
         "console and an app on the robot's screen",
         "Growing the monitoring platform that covers ~85 servers and ~190 services",
+        "Building my own mail server, mailnest: Postfix, Dovecot, Rspamd and Roundcube on my own Dockerfiles, "
+        "managed from Django",
         "Running the GPU servers with LLMs: 8× NVIDIA B200 and 8× RTX PRO 6000",
         "Rewriting the Ilmi and SPlay backends on my django-template",
         "Designing a fault-tolerant two-site platform: Kubernetes, Patroni, S3 replication",
@@ -802,6 +806,7 @@ SKILL_GROUPS = [
             ("KVM", "KVM", False),
             ("Kubernetes", "Kubernetes", False),
             ("Nginx", "Nginx", False),
+            ("Postfix / Dovecot / Rspamd", "Postfix / Dovecot / Rspamd", False),
             ("MinIO / S3", "MinIO / S3", True),
             ("ZFS / RAID", "ZFS / RAID", False),
             ("MikroTik", "MikroTik", False),
@@ -2026,6 +2031,78 @@ PROJECTS = [
             "Monthly maintenance",
         ),
         "skills": ["Python", "Django", "PostgreSQL", "Nginx"],
+    },
+    {
+        "rank": 205,
+        "slug": "mailnest",
+        "category": "personal",
+        "status": DEVELOPMENT,
+        "title_ru": "mailnest — свой почтовый сервер",
+        "title_en": "mailnest — my own mail server",
+        "summary_ru": "Почта на своих доменах без готовых сборок: Postfix, Dovecot, Rspamd и Roundcube на своих "
+        "Dockerfile, управление на Django",
+        "summary_en": "Mail on my own domains without all-in-one bundles: Postfix, Dovecot, Rspamd and Roundcube on "
+        "my own Dockerfiles, managed from Django",
+        "description_ru": (
+            "Почтовый сервер mail.mailnest.uz для моих доменов и проектов семьи. Готовые сборки вроде Mailcow "
+            "или docker-mailserver я не беру: каждый компонент собирается из своего Dockerfile на Debian 13, "
+            "чтобы понимать и контролировать всю цепочку — от приёма письма до IMAP.\n\n"
+            "Домены, ящики и псевдонимы хранит Django, а Postfix и Dovecot читают их из PostgreSQL через "
+            "отдельную роль, которой видны только представления. Схема с самого начала рассчитана на будущий "
+            "сервис mailnest.uz, где клиенты сами подключают домены и создают ящики. Сейчас готовы "
+            "спецификация, документация по всем компонентам, DNS и PTR-запись; дальше сервер собирается по "
+            "этапам, с проверкой после каждого."
+        ),
+        "description_en": (
+            "A mail server, mail.mailnest.uz, for my own domains and my family's projects. I am not using "
+            "bundles like Mailcow or docker-mailserver: every component is built from my own Dockerfile on "
+            "Debian 13, so that I understand and control the whole chain — from accepting a message to IMAP.\n\n"
+            "Domains, mailboxes and aliases live in Django, and Postfix and Dovecot read them from PostgreSQL "
+            "through a separate role that only sees views. The schema is designed from day one for a future "
+            "mailnest.uz service where customers add their own domains and create mailboxes. The specification, "
+            "documentation for every component, DNS and the PTR record are done; the server is now being built "
+            "stage by stage, with a check after each one."
+        ),
+        "role_ru": "Автор",
+        "role_en": "Author",
+        "period_ru": "2026 — н.в.",
+        "period_en": "2026 — now",
+        "highlights_ru": lines(
+            "Свои Dockerfile для Postfix, Dovecot 2.4, Rspamd и Roundcube; из официальных образов — только "
+            "PostgreSQL, Redis и nginx",
+            "Django владеет схемой почты: таблицы — модели, представления и триггеры — миграции; Postfix и "
+            "Dovecot видят только представления",
+            "Лимиты отправки через policy-сервис Postfix: правила в базе, счётчики в Redis",
+            "DKIM-ключи генерирует Django при добавлении домена, в Rspamd они попадают через Redis",
+            "Исходящий 25-й порт открыт только контейнеру Postfix, чтобы соседние проекты на сервере не могли "
+            "рассылать спам",
+            "SPF -all, DMARC p=reject и PTR с первого дня",
+            "Документация: путь письма, DNS и каждый компонент, с маршрутом изучения под этапы работ",
+        ),
+        "highlights_en": lines(
+            "My own Dockerfiles for Postfix, Dovecot 2.4, Rspamd and Roundcube; official images only for "
+            "PostgreSQL, Redis and nginx",
+            "Django owns the mail schema: tables are models, views and triggers are migrations; Postfix and "
+            "Dovecot only see the views",
+            "Sending limits through a Postfix policy service: rules in the database, counters in Redis",
+            "Django generates DKIM keys when a domain is added, and they reach Rspamd through Redis",
+            "Outgoing port 25 is open only to the Postfix container, so neighbouring projects on the server "
+            "cannot send spam",
+            "SPF -all, DMARC p=reject and PTR from day one",
+            "Documentation: the path of a message, DNS and every component, with a study route matched to the "
+            "work stages",
+        ),
+        "skills": [
+            "Postfix / Dovecot / Rspamd",
+            "Python",
+            "Django",
+            "PostgreSQL",
+            "Redis",
+            "Celery",
+            "Docker",
+            "Nginx",
+            "GitHub Actions",
+        ],
     },
     {
         "rank": 210,
