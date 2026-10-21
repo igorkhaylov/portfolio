@@ -60,10 +60,11 @@ PROFILE = {
     ),
     "bio_ru": (
         "Я backend-разработчик на Python и Django и одновременно инженер, который отвечает за "
-        "продакшен целиком. Программирую с 2019 года, с 2022-го работаю в Intersoft tech: начинал "
-        "с backend онлайн-кинотеатра SPlay, а сегодня отвечаю за серверную часть ключевых "
-        "продуктов компании и за всю её инфраструктуру — от железа и гипервизоров до CI/CD, "
-        "мониторинга и GPU-серверов для языковых моделей.\n\n"
+        "продакшен целиком. Программирую с 2019 года. С 2022-го веду backend онлайн-кинотеатра "
+        "SPlay — сначала в медиагруппе Sevimli, с 2024-го в Intersoft tech, где сегодня отвечаю за "
+        "серверную часть ключевых продуктов компании и за всю её инфраструктуру — от железа и "
+        "гипервизоров до CI/CD, мониторинга и GPU-серверов для языковых моделей. По совместительству "
+        "работаю главным специалистом в Центре исламской цивилизации.\n\n"
         "Мне важно, чтобы система работала без меня: понятная архитектура, тесты, деплой одной "
         "командой и откат по тегу, мониторинг с алертами, записанные runbook-и и разборы "
         "инцидентов. Для этого я написал собственный django-template — сейчас на нём строятся "
@@ -74,10 +75,12 @@ PROFILE = {
     ),
     "bio_en": (
         "I am a Python and Django backend developer and, at the same time, the engineer who owns "
-        "production end to end. I have been coding since 2019 and working at Intersoft tech since "
-        "2022: I started on the backend of the SPlay streaming service, and today I own the "
-        "server side of the company's key products and all of its infrastructure — from "
-        "hardware and hypervisors to CI/CD, monitoring and GPU servers for language models.\n\n"
+        "production end to end. I have been coding since 2019. Since 2022 I have been running the "
+        "backend of the SPlay streaming service — first at the Sevimli media group, and since 2024 "
+        "at Intersoft tech, where today I own the server side of the company's key products and all "
+        "of its infrastructure — from hardware and hypervisors to CI/CD, monitoring and GPU servers "
+        "for language models. Part-time, I am also a chief specialist at the Centre of Islamic "
+        "Civilization.\n\n"
         "I care about systems that run without me: a clear architecture, tests, one-command "
         "deploys with rollback by tag, monitoring with alerts, written runbooks and incident "
         "post-mortems. That is why I wrote my own django-template — every new backend project "
@@ -577,6 +580,9 @@ FOCUS_AREAS = [
 # Resume
 # =============================================================================
 
+CIC_RU = "Центр исламской цивилизации в Узбекистане"
+CIC_EN = "Centre of Islamic Civilization in Uzbekistan"
+
 EXPERIENCE = [
     {
         "rank": 10,
@@ -587,48 +593,129 @@ EXPERIENCE = [
         "company_url": "https://intersoft.uz",
         "location_ru": "Ташкент",
         "location_en": "Tashkent",
-        "started_at": date(2022, 5, 1),
+        "started_at": date(2024, 6, 1),
         "finished_at": None,
         "is_current": True,
         "description_ru": (
             "Продуктовая IT-компания: стриминг, медиа, образование, музейные и корпоративные системы. "
-            "Пришёл backend-разработчиком в команду SPlay, со временем стал отвечать за серверную часть "
-            "ключевых продуктов и за всю инфраструктуру компании."
+            "Продолжаю вести backend SPlay и отвечаю за серверную часть ключевых продуктов компании и за всю "
+            "её инфраструктуру."
         ),
         "description_en": (
-            "A product IT company: streaming, media, education, museum and enterprise systems. I joined as "
-            "a backend developer on SPlay and grew into owning the server side of the key products and the "
-            "whole infrastructure of the company."
+            "A product IT company: streaming, media, education, museum and enterprise systems. I keep running "
+            "the SPlay backend and own the server side of the company's key products and its whole "
+            "infrastructure."
         ),
         "highlights_ru": lines(
-            "Основной backend-разработчик SPlay, платформ Qizil Pomada и Ilmi, ARK и билетной системы "
-            "Центра исламской цивилизации",
+            "Основной backend-разработчик SPlay, платформ Qizil Pomada и Ilmi и системы ARK",
             "Отвечаю за весь парк серверов: ~100 хостов на пяти площадках, 10 гипервизоров Proxmox, S3, "
             "сеть и доступ через бастионы",
             "Построил платформу мониторинга и стандарт /deep-health/ для всех проектов",
             "Ввёл в эксплуатацию GPU-серверы для LLM: 8× NVIDIA B200 и 8× RTX PRO 6000",
             "Написал django-template — обязательную основу новых backend-проектов (~30 проектов)",
             "Перевожу команду на фулстек: project-template с Django, React и готовностью к Kubernetes",
-            "Ведущий разработчик системы управления 12 роботами UBTECH Cruzr: сервер, веб-консоль и Android-приложение",
             "Настроил CI/CD: сборка образов в GitHub Actions и GitLab CI, деплой по SSH, self-hosted раннеры",
             "Пишу runbook-и и разборы инцидентов с причинами",
         ),
         "highlights_en": lines(
-            "Main backend developer of SPlay, the Qizil Pomada and Ilmi platforms, ARK and the ticketing "
-            "system of the Centre of Islamic Civilization",
+            "Main backend developer of SPlay, the Qizil Pomada and Ilmi platforms and the ARK system",
             "Own the whole server fleet: ~100 hosts on five sites, 10 Proxmox hypervisors, S3, the network "
             "and bastion-based access",
             "Built the monitoring platform and the /deep-health/ standard for every project",
             "Brought GPU servers for LLMs into production: 8× NVIDIA B200 and 8× RTX PRO 6000",
             "Wrote django-template — the mandatory base of new backend projects (~30 so far)",
             "Moving the team to full-stack: project-template with Django, React and Kubernetes readiness",
-            "Lead developer of the fleet system for 12 UBTECH Cruzr robots: server, web console and Android app",
             "Set up CI/CD: images built in GitHub Actions and GitLab CI, SSH deploys, self-hosted runners",
             "Write runbooks and incident post-mortems with root causes",
         ),
     },
     {
         "rank": 20,
+        "position_ru": "Главный специалист",
+        "position_en": "Chief specialist",
+        "company_ru": CIC_RU,
+        "company_en": CIC_EN,
+        "company_url": "https://iccu.uz",
+        "location_ru": "Ташкент",
+        "location_en": "Tashkent",
+        "started_at": date(2026, 5, 1),
+        "finished_at": None,
+        "is_current": True,
+        "description_ru": "По совместительству. Веду цифровые проекты Центра.",
+        "description_en": "Part-time. I lead the Centre's digital projects.",
+        "highlights_ru": lines(
+            "Билетная система: сайт, киоски, касса, турникеты и AI-ассистент покупки",
+            "Ведущий разработчик системы управления 12 роботами UBTECH Cruzr: сервер, веб-консоль и Android-приложение",
+            "Цифровые сервисы музея: QR-пропуска, архив экспонатов, каталог книг и аудиогид",
+        ),
+        "highlights_en": lines(
+            "Ticketing system: website, kiosks, cashier desk, turnstiles and an AI purchase assistant",
+            "Lead developer of the fleet system for 12 UBTECH Cruzr robots: server, web console and Android app",
+            "Digital museum services: QR passes, an exhibit archive, a book catalogue and an audio guide",
+        ),
+    },
+    {
+        "rank": 30,
+        "position_ru": "Backend-разработчик",
+        "position_en": "Backend developer",
+        "company_ru": "Sevimli Media Group",
+        "company_en": "Sevimli Media Group",
+        "location_ru": "Ташкент",
+        "location_en": "Tashkent",
+        "started_at": date(2022, 4, 1),
+        "finished_at": date(2024, 6, 30),
+        "is_current": False,
+        "description_ru": (
+            "Медиагруппа Sevimli. Пришёл backend-разработчиком в команду онлайн-кинотеатра SevimliPlay — "
+            "сейчас это SPlay — и стал основным разработчиком его серверной части и инфраструктуры."
+        ),
+        "description_en": (
+            "The Sevimli media group. I joined the SevimliPlay streaming service — now SPlay — as a backend "
+            "developer and became the main developer of its server side and infrastructure."
+        ),
+        "highlights_ru": lines(
+            "Основной API: каталог, сериалы, подборки, ТВ-каналы, реклама и промокоды",
+            "Биллинг: подписки, баланс и местные платёжные системы",
+            "Видеоконвейер на FFmpeg и собственное AES-шифрование HLS",
+            "Спроектировал серверную архитектуру сервиса и сам поднял его инфраструктуру",
+        ),
+        "highlights_en": lines(
+            "Core API: catalogue, series, collections, TV channels, ads and promo codes",
+            "Billing: subscriptions, balance and local payment systems",
+            "An FFmpeg video pipeline and custom AES encryption of HLS",
+            "Designed the server architecture of the service and built its infrastructure myself",
+        ),
+    },
+    {
+        "rank": 40,
+        "position_ru": "Главный специалист",
+        "position_en": "Chief specialist",
+        "company_ru": "Агентство кинематографии и Центр развития кинематографии",
+        "company_en": "Cinematography Agency and Cinematography Development Centre",
+        "location_ru": "Ташкент",
+        "location_en": "Tashkent",
+        "started_at": date(2023, 9, 1),
+        "finished_at": date(2024, 11, 30),
+        "is_current": False,
+        "description_ru": (
+            "По совместительству: в Агентстве кинематографии Республики Узбекистан и в Центре развития "
+            "кинематографии. Отвечал за их сайты — разработку, серверы и сопровождение."
+        ),
+        "description_en": (
+            "Part-time, at the Cinematography Agency of the Republic of Uzbekistan and the Cinematography "
+            "Development Centre. I was responsible for their websites — development, servers and maintenance."
+        ),
+        "highlights_ru": lines(
+            "Сайт Агентства кинематографии: backend CMS и API, хостинг и сопровождение",
+            "Сайт Ташкентского международного кинофестиваля: редизайн, мобильная версия, новые функции и сопровождение",
+        ),
+        "highlights_en": lines(
+            "Cinematography Agency website: CMS and API backend, hosting and maintenance",
+            "Tashkent International Film Festival website: redesign, mobile version, new features and maintenance",
+        ),
+    },
+    {
+        "rank": 50,
         "position_ru": "Backend-разработчик, фриланс",
         "position_en": "Backend developer, freelance",
         "company_ru": "Фриланс",
@@ -641,26 +728,22 @@ EXPERIENCE = [
         "description_ru": "",
         "description_en": "",
         "highlights_ru": lines(
-            "Сайт Агентства кинематографии Узбекистана: разработка, хостинг и поддержка (2023–2024)",
-            "Сайт Ташкентского международного кинофестиваля: редизайн и сопровождение (2024)",
             "Сайт Свято-Алексеевского собора в Самарканде — от дизайна до сервера",
             "Backend мобильного узбекско-итальянского словаря",
             "Преподавал программирование на Python в IT-школе",
         ),
         "highlights_en": lines(
-            "Website of the Cinematography Agency of Uzbekistan: development, hosting and support (2023–2024)",
-            "Website of the Tashkent International Film Festival: redesign and maintenance (2024)",
             "Website of St. Alexius Cathedral in Samarkand — from design to server",
             "Backend of an Uzbek–Italian dictionary mobile app",
             "Taught Python programming at an IT school",
         ),
     },
     {
-        "rank": 30,
+        "rank": 60,
         "position_ru": "Программист, специалист технической поддержки",
         "position_en": "Programmer, IT support specialist",
-        "company_ru": "ООО «Sam Antep Gilam»",
-        "company_en": "Sam Antep Gilam LLC",
+        "company_ru": "ООО «Sam-Antep-Gilam»",
+        "company_en": "Sam-Antep-Gilam LLC",
         "location_ru": "Самарканд",
         "location_en": "Samarkand",
         "started_at": date(2019, 1, 1),
@@ -682,7 +765,7 @@ EXPERIENCE = [
         ),
     },
     {
-        "rank": 40,
+        "rank": 70,
         "position_ru": "Оператор ЭВМ",
         "position_en": "Computer operator",
         "company_ru": "Топливный железнодорожный склад",
@@ -698,18 +781,18 @@ EXPERIENCE = [
         "highlights_en": lines("Hardware support and maintenance", "Software installation and configuration"),
     },
     {
-        "rank": 50,
+        "rank": 80,
         "position_ru": "Стажировка",
         "position_en": "Internship",
-        "company_ru": "Самаркандская городская электросеть",
-        "company_en": "Samarkand City Power Grid",
+        "company_ru": "ОАО «Samarqand elektr tarmoqlari»",
+        "company_en": "Samarqand Elektr Tarmoqlari JSC",
         "location_ru": "Самарканд",
         "location_en": "Samarkand",
         "started_at": date(2013, 1, 1),
         "finished_at": date(2017, 12, 31),
         "is_current": False,
-        "description_ru": "Летние стажировки",
-        "description_en": "Summer internships",
+        "description_ru": "Стажировки во время учёбы в городских электросетях Самарканда",
+        "description_en": "Internships at the Samarkand power grid company during my studies",
         "highlights_ru": lines("Перевод должностных инструкций в электронный вид", "Оцифровка схем"),
         "highlights_en": lines("Digitised job descriptions", "Digitised electrical schematics"),
     },
@@ -918,9 +1001,6 @@ DEVELOPMENT = Project.Status.DEVELOPMENT
 OPEN_SOURCE = Project.Status.OPEN_SOURCE
 ARCHIVED = Project.Status.ARCHIVED
 
-CIC_RU = "Центр исламской цивилизации в Узбекистане"
-CIC_EN = "Centre of Islamic Civilization in Uzbekistan"
-
 # `category` is a PROJECT_CATEGORIES slug, `skills` are Skill.name_ru values from
 # SKILL_GROUPS above. Featured projects are shown wider, with their highlights.
 PROJECTS = [
@@ -938,7 +1018,7 @@ PROJECTS = [
             "SPlay (бывший SevimliPlay) — онлайн-кинотеатр с фильмами, сериалами, мультфильмами, "
             "трансляциями телеканалов и вертикальными мини-драмами SDrama. Клиенты — Android, iOS, "
             "Android TV, Tizen, webOS, Apple TV и веб.\n\n"
-            "С мая 2022 года я основной разработчик серверной части: основной API, биллинг, статистика, "
+            "С 2022 года я основной разработчик серверной части: основной API, биллинг, статистика, "
             "видеоконвейер и live-TV origin — и вся инфраструктура, на которой это работает. Сервис "
             "собран из нескольких Django-сервисов: контент и пользователи, биллинг с отдельной базой, "
             "статистика в ClickHouse, сервис VOD и GPU-кодировщик. Видеотека — около 290 ТБ HLS на трёх "
@@ -948,7 +1028,7 @@ PROJECTS = [
             "SPlay (formerly SevimliPlay) is a streaming service with films, series, cartoons, live TV "
             "channels and vertical SDrama mini-dramas. Clients: Android, iOS, Android TV, Tizen, webOS, "
             "Apple TV and the web.\n\n"
-            "Since May 2022 I have been the main developer of the server side — the core API, billing, "
+            "Since 2022 I have been the main developer of the server side — the core API, billing, "
             "statistics, the video pipeline and the live-TV origin — and of all the infrastructure it runs "
             "on. The service is a set of Django services: content and users, billing with its own database, "
             "statistics in ClickHouse, a VOD service and a GPU encoder. The library is about 290 TB of HLS "
@@ -1979,6 +2059,8 @@ PROJECTS = [
         ),
         "role_ru": "Backend-разработчик",
         "role_en": "Backend developer",
+        "client_ru": "Агентство кинематографии Республики Узбекистан",
+        "client_en": "Cinematography Agency of the Republic of Uzbekistan",
         "period_ru": "2023 — 2024",
         "period_en": "2023 — 2024",
         "highlights_ru": lines(
@@ -2006,18 +2088,19 @@ PROJECTS = [
         "summary_en": "The film festival website: Django backend, redesign, mobile version and maintenance",
         "description_ru": (
             "Сайт Ташкентского международного кинофестиваля (tiffest.uz): участвовал в разработке backend на "
-            "Django и переносе данных со старой версии, в 2024 году для Национального центра развития "
-            "кинематографии выполнил редизайн, мобильную версию, новые функции и сопровождение. Сейчас сайт "
-            "отключён."
+            "Django и переносе данных со старой версии, в 2024 году для Центра развития кинематографии "
+            "выполнил редизайн, мобильную версию, новые функции и сопровождение. Сейчас сайт отключён."
         ),
         "description_en": (
             "The website of the Tashkent International Film Festival (tiffest.uz): I worked on the Django "
             "backend and the data migration from the old version, and in 2024 delivered a redesign, a mobile "
-            "version, new features and maintenance for the National Cinematography Development Centre. The "
-            "site is offline now."
+            "version, new features and maintenance for the Cinematography Development Centre. The site is "
+            "offline now."
         ),
         "role_ru": "Backend-разработчик",
         "role_en": "Backend developer",
+        "client_ru": "Центр развития кинематографии",
+        "client_en": "Cinematography Development Centre",
         "period_ru": "2022 — 2024",
         "period_en": "2022 — 2024",
         "highlights_ru": lines(
@@ -2258,8 +2341,14 @@ class Command(BaseCommand):
             FocusArea.objects.update_or_create(section=data["section"], title_ru=data["title_ru"], defaults=data)
         self.stdout.write(f"Focus areas: {len(FOCUS_AREAS)}")
 
-        for data in EXPERIENCE:
-            Experience.objects.update_or_create(position_ru=data["position_ru"], defaults=data)
+        kept = [
+            Experience.objects.update_or_create(
+                position_ru=data["position_ru"], company_ru=data["company_ru"], defaults=data
+            )[0].pk
+            for data in EXPERIENCE
+        ]
+        # The resume is owned by EXPERIENCE: a renamed job must not linger as a second entry.
+        Experience.objects.exclude(pk__in=kept).delete()
         self.stdout.write(f"Experience: {len(EXPERIENCE)}")
 
         for data in EDUCATION:
