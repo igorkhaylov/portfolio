@@ -647,11 +647,13 @@ EXPERIENCE = [
             "Билетная система: сайт, киоски, касса, турникеты и AI-ассистент покупки",
             "Ведущий разработчик системы управления 12 роботами UBTECH Cruzr: сервер, веб-консоль и Android-приложение",
             "Цифровые сервисы музея: QR-пропуска, архив экспонатов, каталог книг и аудиогид",
+            "Вёрстка подарочного издания «Дневника» Клавихо и Скрипторий — веб-редактор книги для команды",
         ),
         "highlights_en": lines(
             "Ticketing system: website, kiosks, cashier desk, turnstiles and an AI purchase assistant",
             "Lead developer of the fleet system for 12 UBTECH Cruzr robots: server, web console and Android app",
             "Digital museum services: QR passes, an exhibit archive, a book catalogue and an audio guide",
+            "Typesetting the gift edition of Clavijo's Diary and Scriptorium, a web book editor for the team",
         ),
     },
     {
@@ -902,6 +904,7 @@ SKILL_GROUPS = [
             ("OpenAPI", "OpenAPI", False),
             ("Платёжные шлюзы", "Payment gateways", False),
             ("Telegram-боты (aiogram)", "Telegram bots (aiogram)", False),
+            ("Node.js", "Node.js", False),
         ],
     },
     {
@@ -1246,6 +1249,93 @@ PROJECTS = [
             "Kotlin",
             "Android SDK",
             "ROS",
+        ],
+    },
+    {
+        "rank": 27,
+        "slug": "scriptorium",
+        "category": "culture",
+        "status": DEVELOPMENT,
+        "is_featured": True,
+        "title_ru": "Скрипторий — конструктор подарочной книги",
+        "title_en": "Scriptorium — a builder for a gift-edition book",
+        "summary_ru": "Веб-редактор, в котором команда верстает подарочное издание «Дневника» Клавихо: компоненты "
+        "оформления, совместная правка, PDF и согласование страниц",
+        "summary_en": "A web editor in which the team lays out the gift edition of Clavijo's Diary: ornament "
+        "components, collaborative editing, PDF and page approval",
+        "description_ru": (
+            "Центр исламской цивилизации готовит подарочное издание «Дневника путешествия в Самарканд ко двору "
+            "Амира Темура» Руи Гонсалеса де Клавихо: формат 240×330 мм, 22 главы и эпилог, оформление в духе "
+            "европейской иллюминированной рукописи XV века. На мне техническая часть книги. Сначала я собирал "
+            "вёрстку скриптами на Python и за 30 сборок отработал шрифт Monomakh, рамки, бумагу и факсимиле. "
+            "Текст в каждой сборке сверялся с исходником слово в слово по текстовому слою PDF.\n\n"
+            "Скриптами книгу правит только разработчик, а дизайнерам и редакторам нужно менять её самим. "
+            "Поэтому я пишу Скрипторий — веб-редактор, в котором страница собирается из готовых компонентов: "
+            "бумаги, рамок, заставок, буквиц, миниатюр, факсимиле и текста. Над книгой одновременно работают "
+            "несколько человек, все правки сохраняются на сервере с полной историей, а страницы согласуются "
+            "через рабочую группу в Telegram."
+        ),
+        "description_en": (
+            "The Centre of Islamic Civilization is preparing a gift edition of Ruy González de Clavijo's "
+            '"Diary of a Journey to Samarkand to the Court of Amir Temur": 240×330 mm, 22 chapters and an '
+            "epilogue, designed in the style of a 15th-century European illuminated manuscript. I own the "
+            "technical side of the book. First I built the layout with Python scripts, and over 30 builds "
+            "worked out the Monomakh typeface, frames, paper and facsimiles. In every build the text was "
+            "checked against the source word for word through the PDF text layer.\n\n"
+            "Only a developer can change a book built by scripts, but designers and editors need to change it "
+            "themselves. So I am writing Scriptorium — a web editor where a page is assembled from ready-made "
+            "components: paper, frames, headpieces, initials, miniatures, facsimiles and text. Several people "
+            "work on the book at once, every change is saved on the server with full history, and pages are "
+            "approved through the team's Telegram group."
+        ),
+        "role_ru": "Автор: вёрстка книги и редактор",
+        "role_en": "Author: book typesetting and the editor",
+        "client_ru": CIC_RU,
+        "client_en": CIC_EN,
+        "period_ru": "2026 — н.в.",
+        "period_en": "2026 — now",
+        "highlights_ru": lines(
+            "Редактор на React 19: слои страницы с точностью до миллиметра, сетка, магнит, правка разворота, "
+            "обтекание иллюстраций текстом",
+            "Совместная правка в реальном времени: комнаты на WebSocket, слияние изменений по полям, конфликты "
+            "без потери чужих правок",
+            "PDF собирается в браузере: встроенные шрифты и выделяемый Unicode-текст поверх оформления",
+            "Библиотека из 449 компонентов, из них 132 буквицы в четырёх оформлениях; загрузка PSD и TIFF до "
+            "5 ГБ с переводом CMYK в sRGB",
+            "История книги: неизменяемые снимки версий, журнал действий с цепочкой хешей, личные аккаунты",
+            "API для ИИ-ассистентов по OpenAPI: синхронизация с подтверждением, защита от устаревших правок, "
+            "удалять ключам нельзя",
+            "Согласование через Telegram: бот архивирует переписку группы в SQLite и зашифрованное S3, решения "
+            "по страницам привязаны к сообщениям",
+            "72 теста и 13 браузерных сценариев на Playwright; деплой готовым образом из GHCR с откатом по healthcheck",
+        ),
+        "highlights_en": lines(
+            "A React 19 editor: page layers placed to the millimetre, a grid, snapping, spread editing, text "
+            "wrapping around illustrations",
+            "Real-time collaboration: WebSocket rooms, field-level merging, conflicts that never overwrite a "
+            "colleague's edits",
+            "The PDF is built in the browser: embedded fonts and selectable Unicode text over the artwork",
+            "A library of 449 components, including 132 initials in four designs; PSD and TIFF uploads up to "
+            "5 GB with CMYK converted to sRGB",
+            "Book history: immutable version snapshots, a hash-chained audit log, personal accounts",
+            "An OpenAPI API for AI assistants: acknowledged sync, protection against stale writes, keys cannot "
+            "delete anything",
+            "Approval through Telegram: a bot archives the group chat to SQLite and encrypted S3, and page "
+            "decisions link to the messages behind them",
+            "72 tests and 13 Playwright browser scenarios; deployed as a ready image from GHCR with rollback on "
+            "a failed healthcheck",
+        ),
+        "skills": [
+            "Node.js",
+            "JavaScript",
+            "React",
+            "Vite",
+            "Python",
+            "MinIO / S3",
+            "Playwright",
+            "Docker",
+            "GitHub Actions",
+            "GHCR / Docker Registry",
         ],
     },
     {
