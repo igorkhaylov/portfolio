@@ -125,8 +125,8 @@ class TestSeedCommand:
         Experience.objects.create(position="Стажировка", company="Old company name")
         call_command("seed_portfolio", verbosity=0)
         assert not Experience.objects.filter(company="Old company name").exists()
-        # The same position at two employers stays two entries.
-        assert Experience.objects.filter(position_ru="Главный специалист").count() == 2
+        # The same position at several employers stays separate entries.
+        assert Experience.objects.filter(position_ru="Главный специалист").count() == 3
 
     def test_seed_fills_every_section(self, db):
         call_command("seed_portfolio", verbosity=0)

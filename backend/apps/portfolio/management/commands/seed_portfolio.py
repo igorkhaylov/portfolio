@@ -690,28 +690,54 @@ EXPERIENCE = [
         "rank": 40,
         "position_ru": "Главный специалист",
         "position_en": "Chief specialist",
-        "company_ru": "Агентство кинематографии и Центр развития кинематографии",
-        "company_en": "Cinematography Agency and Cinematography Development Centre",
+        "company_ru": "Агентство кинематографии Республики Узбекистан",
+        "company_en": "Cinematography Agency of the Republic of Uzbekistan",
+        "location_ru": "Ташкент",
+        "location_en": "Tashkent",
+        "started_at": date(2023, 9, 1),
+        "finished_at": date(2024, 11, 30),
+        "is_current": False,
+        "description_ru": "По совместительству. Отвечал за сайт Агентства — разработку, серверы и сопровождение.",
+        "description_en": "Part-time. I was responsible for the Agency's website — development, servers and maintenance.",
+        "highlights_ru": lines(
+            "Backend CMS и API сайта Uzbekkino: новости и фильмы, документы, открытые данные, тендеры",
+            "Обращения граждан с отслеживанием статуса и рассылка новостей",
+            "Хостинг и сопровождение",
+        ),
+        "highlights_en": lines(
+            "CMS and API backend of the Uzbekkino website: news and films, documents, open data, tenders",
+            "Citizens' appeals with status tracking and a news mailing list",
+            "Hosting and maintenance",
+        ),
+    },
+    {
+        "rank": 45,
+        "position_ru": "Главный специалист",
+        "position_en": "Chief specialist",
+        "company_ru": "Центр развития кинематографии",
+        "company_en": "Cinematography Development Centre",
         "location_ru": "Ташкент",
         "location_en": "Tashkent",
         "started_at": date(2023, 9, 1),
         "finished_at": date(2024, 11, 30),
         "is_current": False,
         "description_ru": (
-            "По совместительству: в Агентстве кинематографии Республики Узбекистан и в Центре развития "
-            "кинематографии. Отвечал за их сайты — разработку, серверы и сопровождение."
+            "По совместительству. Отвечал за сайт Ташкентского международного кинофестиваля — разработку и "
+            "сопровождение."
         ),
         "description_en": (
-            "Part-time, at the Cinematography Agency of the Republic of Uzbekistan and the Cinematography "
-            "Development Centre. I was responsible for their websites — development, servers and maintenance."
+            "Part-time. I was responsible for the Tashkent International Film Festival website — development "
+            "and maintenance."
         ),
         "highlights_ru": lines(
-            "Сайт Агентства кинематографии: backend CMS и API, хостинг и сопровождение",
-            "Сайт Ташкентского международного кинофестиваля: редизайн, мобильная версия, новые функции и сопровождение",
+            "Сайт кинофестиваля tiffest.uz: backend на Django и перенос данных со старой версии",
+            "Редизайн, мобильная версия и новые функции",
+            "Ежемесячное сопровождение",
         ),
         "highlights_en": lines(
-            "Cinematography Agency website: CMS and API backend, hosting and maintenance",
-            "Tashkent International Film Festival website: redesign, mobile version, new features and maintenance",
+            "The tiffest.uz festival website: Django backend and data migration from the old version",
+            "Redesign, mobile version and new features",
+            "Monthly maintenance",
         ),
     },
     {
